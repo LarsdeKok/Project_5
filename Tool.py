@@ -7,4 +7,3 @@ connection_data = pd.read_excel("Connexxion data - 2024-2025.xlsx")
 omloopplanning = pd.read_excel("omloopplanning.xlsx")
 
 from ToolBram import slpfjeoiasjf
-
