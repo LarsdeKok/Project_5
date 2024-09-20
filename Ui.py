@@ -6,5 +6,17 @@ st.title('test2')
 
 st.write('test')
 
-file = st.file_uploader('Dienstregeling')
-file2 = st.file_uploader('Omloopplanning')
+dienstregeling = st.file_uploader('Dienstregeling')
+omloop = st.file_uploader('Omloopplanning')
+
+
+if st.button("Submit"):
+    if dienstregeling is not None and omloop is not None:
+        st.write("Why hello there")
+        filesUploaded()
+    else:
+        st.write("Please add the files first.")
+
+def filesUploaded():
+    df1=pd.read_excel(dienstregeling)
+    st.write(df1)
