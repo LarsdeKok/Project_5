@@ -1,0 +1,32 @@
+300kWu capaciteit
+SOH waarde vragen (uitgaan van .85)
+Minimale SOC (.1 * SOH)
+Per omloop:
+    Start op SOH*300
+    Elke regel (SOC-energieverbruik) (laden is negatief, --=+ dus wordt automatisch gefixt)
+    Checken of SOC onder minimale SOC is
+
+# Define the initial total and threshold
+initial_value = 300  # Start value for running total
+threshold = 100      # Threshold you want to check against
+
+# Step 2: Create a function to calculate the running total
+def calculate_running_total(energieverbruik, start_value):
+    running_total = start_value
+    running_totals = []
+    
+    # Iterate through each value in 'energieverbruik' and subtract from the running total
+    for value in energieverbruik:
+        running_total -= value
+        running_totals.append(running_total)
+    
+    return running_totals
+
+# Step 3: Apply the function to calculate the running total for each group of 'omloop nummer'
+df['running_total'] = df.groupby('omloop nummer')['energieverbruik'].apply(lambda x: calculate_running_total(x, initial_value))
+
+# Step 4: Check if the running total is above the threshold
+df['above_threshold'] = df['running_total'].apply(lambda x: x > threshold)
+
+# Step 5: Print or save the result
+print(df[['omloop nummer', 'energieverbruik', 'running_total', 'above_threshold']])
