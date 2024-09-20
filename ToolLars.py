@@ -6,6 +6,7 @@ import numpy as np
 
 
 def aantal_bussen(planning):
+    planning = pd.DataFrame(planning)
     bussen = planning[planning.columns[len(planning.columns)-1]].unique()
     return bussen
 
