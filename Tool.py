@@ -5,4 +5,5 @@ import numpy as np
 
 
 def aantal_bussen(omloopplanning):
-    omloopplanning[""]
+    omloopplanning[omloopplanning.columns[len(omloopplanning.columns)-1]]
+    omloopplanning.unique
