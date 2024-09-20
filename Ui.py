@@ -19,3 +19,6 @@ if st.button("Submit"):
         filesUploaded()
     else:
         st.write("Please add the files first.")
+
+from ToolLars import aantal_bussen
+aantallen = aantal_bussen(omloop)
