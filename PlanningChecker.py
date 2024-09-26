@@ -22,7 +22,7 @@ def filesUploaded(dienstregeling, omloop):
     generate_values(aantallen)
 
 def generate_values(aantallen):
-    inputfields = []
+    inputfields = {}
     for i in aantallen:
         inputfields.append(st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100))
     if st.button("Submit"):
@@ -53,11 +53,11 @@ else:
             del st.session_state[key]
         st.switch_page("PlanningChecker.py")
 
-with st.popover("Submit files"): 
-    if dienstregeling is not None and omloop is not None:
-        filesUploaded()
-    else:
-        st.write("Please add the files first.")
+# with st.popover("Submit files"): 
+#     if dienstregeling is not None and omloop is not None:
+#         filesUploaded()
+#     else:
+#         st.write("Please add the files first.")
 
 
 
