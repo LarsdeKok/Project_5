@@ -48,7 +48,7 @@ def doTheChecks():
     st.switch_page("pages/Results.py")
     
 
-with st.popover("Submit files"):
+with st.popover("Submit files"): 
     if dienstregeling is not None and omloop is not None:
         filesUploaded()
     else:
