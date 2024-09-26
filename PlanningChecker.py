@@ -53,6 +53,11 @@ else:
             del st.session_state[key]
         st.switch_page("PlanningChecker.py")
 
+with st.popover("Submit files"): 
+    if dienstregeling is not None and omloop is not None:
+        filesUploaded()
+    else:
+        st.write("Please add the files first.")
 
 
 
