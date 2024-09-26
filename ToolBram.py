@@ -11,7 +11,7 @@ afstandsmatrix = pd.read_excel("Connexxion data - 2024-2025.xlsx", sheet_name='A
 
 # Defining parameters
 rijdend_verbruik=1.2 # Per kilometer
-stilstaand_verbruik=0.01 # Per uur? Minuut??
+stilstaand_verbruik=0.01 # Altijd (onafhankelijk van tijd)
 
 # Fill blanks in 'Buslijn' with 'materiaalrit'
 afstandsmatrix = afstandsmatrix.fillna('materiaalrit')
