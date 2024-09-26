@@ -22,12 +22,13 @@ def filesUploaded(dienstregeling, omloop):
     generate_values(aantallen)
 
 def generate_values(aantallen):
-    inputfields = []
+    inputfields = {}
     for i in aantallen:
-        inputfields.append(st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100))
+        inputfields[int(i)] = st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100)
     if st.button("Submit"):
-        st.write('check voor values')
+        st.write('Check for values')
         doTheChecks(inputfields)
+    return inputfields
 
 def doTheChecks(inputfields):
     st.session_state['SOHs'] = inputfields
@@ -36,8 +37,6 @@ def doTheChecks(inputfields):
     st.switch_page("pages/Results.py")
 
 if 'FormFilled' not in st.session_state:
-
-
     dienstregeling = st.file_uploader('Dienstregeling', type=['xlsx'],accept_multiple_files=False)
     omloop = st.file_uploader('Omloopplanning', type=['xlsx'],accept_multiple_files=False)
 
@@ -53,6 +52,11 @@ else:
             del st.session_state[key]
         st.switch_page("PlanningChecker.py")
 
+# with st.popover("Submit files"): 
+#     if dienstregeling is not None and omloop is not None:
+#         filesUploaded()
+#     else:
+#         st.write("Please add the files first.")
 
 
 
