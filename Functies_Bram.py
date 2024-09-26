@@ -1,4 +1,7 @@
 def omloopplanning_buslijn(omloopplanning):
+    '''
+    Replaces the empty cells in 'buslijn' with the corresponding 'activiteit'
+    '''
     omloopplanning['buslijn'] = omloopplanning['buslijn'].fillna('##')
     for i in range(len(omloopplanning)):
         if omloopplanning['activiteit'][i]=='materiaal rit':
@@ -10,6 +13,9 @@ def omloopplanning_buslijn(omloopplanning):
     omloopplanning['buslijn'] = omloopplanning['buslijn'].apply(lambda x: int(x) if isinstance(x, float) else x)
 
 def afstandcode_maken(omloopplanning):
+    '''
+    Creates a new column called 'afstandcode' which corresponds to the afstandcode in the dictionary
+    '''
     omloopplanning['afstandcode']=''
     for i in range(len(omloopplanning)):
         omloopplanning['afstandcode'][i]=f"{omloopplanning['startlocatie'][i]}{omloopplanning['eindlocatie'][i]}{omloopplanning['buslijn'][i]}"
