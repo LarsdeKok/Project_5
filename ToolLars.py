@@ -10,3 +10,4 @@ def aantal_bussen(planning):
     bussen = planning[planning.columns[len(planning.columns)-1]].unique()
     return bussen
 
+

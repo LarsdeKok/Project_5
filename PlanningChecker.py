@@ -27,8 +27,7 @@ def generate_values(aantallen):
         inputfields[int(i)] = st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100)
     if st.button("Submit"):
         st.write('Check for values')
-        doTheChecks(inputfields)
-    return inputfields
+        doTheChecks(pd.DataFrame.from_dict(inputfields, orient="index"))
 
 def doTheChecks(inputfields):
     st.session_state['SOHs'] = inputfields
