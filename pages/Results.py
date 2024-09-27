@@ -11,7 +11,8 @@ def mainFunction():
     st.markdown("# Plotting Demo")
     st.sidebar.header("Plotting Demo222222")
     omloop = omloop.merge(Soh ,left_on = omloop[omloop.columns[len(omloop.columns)-1]], right_on = Soh.index)
-    omloop = omloop.drop(omloop.columns[[0, 1, -1]], axis=1)
+    omloop = omloop.drop(omloop.columns[[0, -1]], axis=1)
+    omloop.columns.values[0] = "rijnummer"
     st.write(omloop)
 
 if 'FormFilled' not in st.session_state:
