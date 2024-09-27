@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.stats as sp
 import numpy as np
+import streamlit as st
 
 
 def aantal_bussen(planning):
@@ -19,7 +20,14 @@ def duur_activiteiten(omloop):
 def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
-    tekortopladen.head(10)
     if len(tekortopladen.index) > 0:
-        tekortopladen
-        print(f"De bovenstaande oplaadmomenten zijn te kort.")
+        st.write(tekortopladen)
+        st.write(f"De bovenstaande oplaadmomenten zijn te kort.")
+
+def aanpassingen_op_omloop(omloop, Soh):
+    omloop = duur_activiteiten(omloop)
+    omloop = omloop.merge(Soh ,left_on = omloop[omloop.columns[len(omloop.columns)-2]], right_on = Soh.index)
+    omloop = omloop.drop(omloop.columns[[0]], axis=1)
+    omloop.columns.values[0] = "rijnummer"
+    omloop.columns.values[len(omloop.columns)-1] = "SOH"
+    return omloop
