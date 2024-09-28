@@ -31,4 +31,9 @@ for i in range(len(afstandsmatrix)):
 # Add column afstandcode
 from Functies_Bram import afstandcode_maken
 afstandcode_maken(omloopplanning)
+
+# Add column energieverbruik2
+from Functies_Bram import energieverbruik_berekenen
+energieverbruik_berekenen(omloopplanning, afstand)
+
 print(omloopplanning)

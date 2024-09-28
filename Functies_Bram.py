@@ -19,3 +19,16 @@ def afstandcode_maken(omloopplanning):
     omloopplanning['afstandcode']=''
     for i in range(len(omloopplanning)):
         omloopplanning['afstandcode'][i]=f"{omloopplanning['startlocatie'][i]}{omloopplanning['eindlocatie'][i]}{omloopplanning['buslijn'][i]}"
+
+def energieverbruik_berekenen(omloopplanning, afstand:dict):
+    '''
+    Creates a new column called 'energieverbruik2' which contains the newly calculated energy usage
+    '''
+    omloopplanning['energieverbruik2']=''
+    for i in range(len(omloopplanning)):
+        if 'idle' in omloopplanning['buslijn'][i]:
+            omloopplanning['energieverbruik2'][i]=0.01
+        elif 'opladen' in omloopplanning['buslijn'][i]:
+            omloopplanning['energieverbruik2'][i]=-1
+        else:
+            omloopplanning['energieverbruik2'][i]=afstand[omloopplanning['afstandcode']]
