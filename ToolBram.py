@@ -34,6 +34,6 @@ afstandcode_maken(omloopplanning)
 
 # Add column energieverbruik2
 from Functies_Bram import energieverbruik_berekenen
-energieverbruik_berekenen(omloopplanning, afstand)
+energieverbruik_berekenen(omloopplanning, afstand, rijdend_verbruik)
 
-print(omloopplanning)
+print(omloopplanning['energieverbruik'],omloopplanning['energieverbruik2'])
