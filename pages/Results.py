@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop
+from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop, Check_dienstregeling
 from ToolBram import Berekinging_EngergieVerbruik
 #from ToolBram import [Naam functie]
 
@@ -14,6 +14,7 @@ def mainFunction():
     afstandsmatrix = st.session_state["Afstandsmatrix"]
     st.markdown("# Plotting Demo")
     st.sidebar.header("Plotting Demo222222")
+    Check_dienstregeling(omloop, Dienstregeling)
     omloop = aanpassingen_op_omloop(omloop,Soh)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
     oplaadtijd(omloop)
