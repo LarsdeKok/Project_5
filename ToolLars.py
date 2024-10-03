@@ -33,3 +33,4 @@ def oplaadtijd(omloop):
         st.write(f"De bovenstaande oplaadmomenten zijn te kort.")
     else:
         st.write("✓) Elke bus wordt minimaal 15 minuten opgeladen")
+
