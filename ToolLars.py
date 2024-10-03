@@ -26,7 +26,7 @@ def aanpassingen_op_omloop(omloop, Soh):
     return omloop
 
 def oplaadtijd(omloop):
-    oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]kk
+    oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen.index) > 0:
         st.write(tekortopladen)
