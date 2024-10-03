@@ -14,6 +14,7 @@ def mainFunction():
     oplaadtijd(omloop)
     st.write(omloop)
 
+
 if 'FormFilled' not in st.session_state:
     st.write("Please enter data first.")
 else:

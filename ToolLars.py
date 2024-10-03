@@ -17,13 +17,6 @@ def duur_activiteiten(omloop):
     omloop["diff"] = omloop[omloop.columns[4]] - omloop[omloop.columns[3]]
     return omloop
 
-def oplaadtijd(omloop):
-    oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
-    tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
-    if len(tekortopladen.index) > 0:
-        st.write(tekortopladen)
-        st.write(f"De bovenstaande oplaadmomenten zijn te kort.")
-
 def aanpassingen_op_omloop(omloop, Soh):
     omloop = duur_activiteiten(omloop)
     omloop = omloop.merge(Soh ,left_on = omloop[omloop.columns[len(omloop.columns)-2]], right_on = Soh.index)
@@ -31,3 +24,10 @@ def aanpassingen_op_omloop(omloop, Soh):
     omloop.columns.values[0] = "rijnummer"
     omloop.columns.values[len(omloop.columns)-1] = "SOH"
     return omloop
+
+def oplaadtijd(omloop):
+    oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]kk
+    tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
+    if len(tekortopladen.index) > 0:
+        st.write(tekortopladen)
+        st.write(f"De bovenstaande oplaadmomenten zijn te kort.")
