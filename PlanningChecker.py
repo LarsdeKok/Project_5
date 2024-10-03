@@ -14,9 +14,11 @@ st.write('Made by: Group 8')
 def filesUploaded(dienstregeling, omloop):
     dfomloop=pd.read_excel(omloop)
     dfdienst=pd.read_excel(dienstregeling)
+    dfafstand = pd.read_excel(dienstregeling, "Afstandsmatrix")
 
     st.session_state['Omloop'] = dfomloop
     st.session_state['Dienstregeling'] = dfdienst
+    st.session_state["Afstandsmatrix"] = dfafstand
 
     aantallen = aantal_bussen(dfomloop)
     generate_values(aantallen)
