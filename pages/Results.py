@@ -13,6 +13,10 @@ def mainFunction():
     st.sidebar.header("Plotting Demo222222")
     omloop = aanpassingen_op_omloop(omloop,Soh)
     oplaadtijd(omloop)
+
+    if st.button("Export to Excel"):
+        st.write("Yippie")
+        #Export functie aanroepen
     ## Hier volgende functies achter plakken
     st.write(omloop)
 
