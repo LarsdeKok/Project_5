@@ -26,7 +26,7 @@ def filesUploaded(dienstregeling, omloop):
 def generate_values(aantallen):
     inputfields = {}
     for i in aantallen:
-        inputfields[int(i)] = st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100)
+        inputfields[int(i)] = st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100, value=90)
     if st.button("Submit"):
         st.write('Check for values')
         doTheChecks(pd.DataFrame.from_dict(inputfields, orient="index"))
@@ -38,8 +38,8 @@ def doTheChecks(inputfields):
     st.switch_page("pages/Results.py")
 
 if 'FormFilled' not in st.session_state:
-    dienstregeling = st.file_uploader('Dienstregeling', type=['xlsx'],accept_multiple_files=False)
-    omloop = st.file_uploader('Omloopplanning', type=['xlsx'],accept_multiple_files=False)
+    dienstregeling = st.file_uploader('Time table', type=['xlsx'],accept_multiple_files=False)
+    omloop = st.file_uploader('Bus planning', type=['xlsx'],accept_multiple_files=False)
 
     with st.popover("Submit files"):
         if dienstregeling is not None and omloop is not None:
