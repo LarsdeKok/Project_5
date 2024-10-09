@@ -19,11 +19,10 @@ def mainFunction():
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
     oplaadtijd(omloop)
 
-    if st.button("Export to Excel"):
+    if st.button("Export all used data to Excel"):
         st.write("Yippie")
         #Export functie aanroepen
     ## Hier volgende functies achter plakken
-    st.write(omloop)
 
 
 if 'FormFilled' not in st.session_state:

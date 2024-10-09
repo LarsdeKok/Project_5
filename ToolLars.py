@@ -23,6 +23,8 @@ def aanpassingen_op_omloop(omloop, Soh):
     omloop = omloop.drop(omloop.columns[[0]], axis=1)
     omloop.columns.values[0] = "rijnummer"
     omloop.columns.values[len(omloop.columns)-1] = "SOH"
+    omloop['starttijd'] = pd.to_datetime(omloop['starttijd'], format='%H:%M:%S').dt.time
+    omloop['eindtijd'] = pd.to_datetime(omloop['eindtijd'], format='%H:%M:%S').dt.time
     return omloop
 
 def oplaadtijd(omloop):
@@ -30,33 +32,38 @@ def oplaadtijd(omloop):
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen.index) > 0:
         st.write(tekortopladen)
-        st.write(f"De bovenstaande oplaadmomenten zijn te kort.")
+        st.write(f"The following charge times are to short.")
     else:
-        st.write("✓) Elke bus wordt minimaal 15 minuten opgeladen")
+        st.write("✓) Each bus is charged for at least 15 minutes")
 
-def Check_dienstregeling(dienstregeling, omloop):
+def Check_dienstregeling(connexxion_df, omloopplanning_df):
     """
     Function to check if all rides in the Connexxion data are covered by the omloopplanning
     and return a dataframe of uncovered rides.
     
     Args:
-    dienstregeling (pd.DataFrame): Connexxion rides data.
-    omloop (pd.DataFrame): Omloopplanning data.
+    connexxion_df (pd.DataFrame): Connexxion rides data.
+    omloopplanning_df (pd.DataFrame): Omloopplanning data.
     
     Returns:
     pd.DataFrame: DataFrame of rides that are not covered in the omloopplanning.
-    """    
+    """
+    # Convert time columns to datetime for accurate comparisons
+    connexxion_df['vertrektijd'] = pd.to_datetime(connexxion_df['vertrektijd'], format='%H:%M').dt.time
+    omloopplanning_df['starttijd'] = pd.to_datetime(omloopplanning_df['starttijd'], format='%H:%M:%S').dt.time
+    omloopplanning_df['eindtijd'] = pd.to_datetime(omloopplanning_df['eindtijd'], format='%H:%M:%S').dt.time
+    
     uncovered_rides = []
     
     # Iterate over each ride in the Connexxion data
-    for idx, ride in dienstregeling.iterrows():
+    for idx, ride in connexxion_df.iterrows():
         ride_covered = False
         
         # Filter omloopplanning for matching bus line, start, and end locations
-        matching_omloop = omloop[
-            (omloop['buslijn'] == ride['buslijn']) & 
-            (omloop['startlocatie'] == ride['startlocatie']) & 
-            (omloop['eindlocatie'] == ride['eindlocatie'])
+        matching_omloop = omloopplanning_df[
+            (omloopplanning_df['buslijn'] == ride['buslijn']) & 
+            (omloopplanning_df['startlocatie'] == ride['startlocatie']) & 
+            (omloopplanning_df['eindlocatie'] == ride['eindlocatie'])
         ]
         
         # Check if the vertrektijd of the ride is within the start and end time in omloopplanning
@@ -70,6 +77,7 @@ def Check_dienstregeling(dienstregeling, omloop):
     
     # Return a DataFrame of uncovered rides
     if uncovered_rides:
-        return pd.DataFrame(uncovered_rides)
+        st.write("The following rides won't be driven, given your bus planning")
+        st.write(pd.DataFrame(uncovered_rides))
     else:
-        return st.write("All rides will be driven using your given bus planning")
+        st.write("✓) All bus rides will be driven on time, given your bus planning")
