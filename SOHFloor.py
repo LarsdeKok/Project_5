@@ -5,22 +5,27 @@ import scipy.stats as sp
 import numpy as np
 import streamlit as st
 
+def check_SOC(omloopplanning):
+    '''
+    
+    '''
+    SOH = st.session_state["SOHs"]
+    capaciteit = 300
+    SOC_kolom=[]
+    for i in range(1, max(omloopplanning['omloop nummer'])+1):
+        df = omloopplanning['omloop nummer'==i]
+        max_batterij = SOH[i-1] * capaciteit
+        baterij_start = 0.9 * max_batterij # 0.9 omdat wij dervanuit gaan dat de baterij niet verder dan dit oplaad snachts
+        min_batterij = 0.1 * max_batterij
+        for j in range(len(df)):
+            if j == 0:
+                SOC=baterij_start
+                SOC_kolom.append(SOC)
+            else:
+                SOC=SOC_kolom[-1]-df['energieverbruik2'][j]
+                SOC_kolom.append(SOC)
+            
 
-omloopplanning = pd.read_excel("omloopplanning.xlsx")
 
-SOH = st.session_state["SOHs"]
-
-# Functie om de SOC te berekenen op basis van de SOH en te controleren of deze minstens 10% is
-def check_SOC(SOH):
-   
-    max_SOC = 0.9 * SOH  # De bus wordt tot 90% van de SOH opgeladen
-    beschikbare_SOC = max_SOC - 10  # Houd rekening met de veiligheidsmarge van 10%
-
-    # ik weet niet zeker of hier 0 of 10 moet staan. (aangezien je de veiligheidsmarge al deraf haalt.)
-    if beschikbare_SOC >= 0:
-        return True
-    else:
-        return False
-
-# Testen
-check_SOC(85)  # resultaat True of False 
+    omloopplanning['SOC']=SOC_kolom
+    omloopplanning['min_SOC']=omloopplanning['SOC'<min_batterij]
