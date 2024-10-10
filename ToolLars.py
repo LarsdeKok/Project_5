@@ -35,7 +35,7 @@ def oplaadtijd(omloop):
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen.index) > 0:
         st.write(f"The following charge times are to short.")
-        st.write(tekortopladen)
+        st.write(tekortopladen[["starttijd","eindtijd","activiteit","omloop nummer"]])
     else:
         st.write("✓) Each bus is charged for at least 15 minutes.")
 
@@ -57,7 +57,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
         ]
 
         for _, omloop in matching_omloop.iterrows():
-            if omloop['starttijd'] <= ride['vertrektijd'] <= omloop['eindtijd']:
+            if omloop['starttijd'] == ride['vertrektijd']:
                 ride_covered = True
                 break
         

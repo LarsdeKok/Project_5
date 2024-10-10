@@ -14,10 +14,10 @@ def mainFunction():
     afstandsmatrix = st.session_state["Afstandsmatrix"]
     st.markdown("# Plotting Demo")
     st.sidebar.header("Plotting Demo222222")
-    Check_dienstregeling(Dienstregeling, omloop)
     omloop = aanpassingen_op_omloop(omloop,Soh)
-    Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
+    Check_dienstregeling(Dienstregeling, omloop)
     oplaadtijd(omloop)
+    Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
 
     if st.button("Export all used data to Excel"):
         st.write("Yippie")
