@@ -18,6 +18,7 @@ def mainFunction():
     oplaadtijd(omloop)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
     Gantt_chart(omloop)
+    st.write(omloop)
 
     if st.button("Export all used data to Excel"):
         st.write("Yippie")
