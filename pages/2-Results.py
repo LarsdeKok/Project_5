@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop, Check_dienstregeling, Gantt_chart
 from ToolBram import Berekinging_EngergieVerbruik
+from SOHFloor import check_SOC
 
 st.set_page_config(page_title="Plotting Demo", page_icon="📈")
 
@@ -17,6 +18,7 @@ def mainFunction():
     Check_dienstregeling(Dienstregeling, omloop)
     oplaadtijd(omloop)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
+    check_SOC(omloop, st.session_state["SOHs"])
     Gantt_chart(omloop)
 
     if st.button("Export all used data to Excel"):
