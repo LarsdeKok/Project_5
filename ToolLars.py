@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as sp
 import numpy as np
 import streamlit as st
+import plotly.express as px
 
 
 def aantal_bussen(planning):
@@ -69,3 +70,21 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
         st.write(pd.DataFrame(uncovered_rides))
     else:
         st.write("✓) All bus rides will be driven on time, given your bus planning.")
+
+def Gantt_chart(omloop):
+    fig = px.timeline(omloop, x_start="starttijd datum", x_end="eindtijd datum", y="omloop nummer", color="activiteit")
+    fig.update_yaxes(tickmode='linear', tick0=1, dtick=1, autorange="reversed", showgrid=True, gridcolor='lightgray', gridwidth=1)
+    fig.update_xaxes(tickformat="%H:%M", showgrid=True, gridcolor="lightgray", gridwidth = 1)
+    fig.update_layout(
+        legend=dict(
+            orientation="h", 
+            yanchor="bottom",  
+            y=1.1,  
+            xanchor="right", 
+            x=1 
+        )
+    )
+    fig.update_layout(
+            title=dict(text="Gantt chart of the given bus planning", font=dict(size=25))
+    )
+    return st.plotly_chart(fig)

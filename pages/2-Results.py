@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop, Check_dienstregeling
+from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop, Check_dienstregeling, Gantt_chart
 from ToolBram import Berekinging_EngergieVerbruik
-#from ToolBram import [Naam functie]
 
 st.set_page_config(page_title="Plotting Demo", page_icon="📈")
 
@@ -18,6 +17,7 @@ def mainFunction():
     Check_dienstregeling(Dienstregeling, omloop)
     oplaadtijd(omloop)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
+    Gantt_chart(omloop)
 
     if st.button("Export all used data to Excel"):
         st.write("Yippie")
@@ -26,7 +26,7 @@ def mainFunction():
 
 
 if 'FormFilled' not in st.session_state:
-    st.write("Please enter data first.")
+    st.write("Please upload your files first.")
 else:
     mainFunction()
 
