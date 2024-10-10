@@ -28,6 +28,22 @@ def aanpassingen_op_omloop(omloop, Soh):
     omloop.columns.values[len(omloop.columns)-1] = "SOH"
     omloop['starttijd'] = pd.to_datetime(omloop['starttijd'], format='%H:%M:%S').dt.time
     omloop['eindtijd'] = pd.to_datetime(omloop['eindtijd'], format='%H:%M:%S').dt.time
+
+    rows = []
+    for i in range(len(omloop) - 1):
+        rows.append(omloop.iloc[i])
+        if omloop.iloc[i]['eindtijd'] != omloop.iloc[i + 1]['starttijd']:
+            gap_row = pd.Series({
+                'eindtijd': omloop.iloc[i+1]["starttijd"], 
+                'starttijd': omloop.iloc[i]["eindtijd"],
+                'activiteit': "idle",
+                'eindtijd datum': omloop.iloc[i+1]["starttijd datum"], 
+                'starttijd datum': omloop.iloc[i]["eindtijd datum"],
+                'omloop nummer' : omloop.iloc[i]["omloop nummer"]
+            })
+            rows.append(gap_row)
+    rows.append(omloop.iloc[-1])
+    omloop = pd.concat([pd.DataFrame([row]) for row in rows], ignore_index=True)
     return omloop
 
 
@@ -75,16 +91,16 @@ def Gantt_chart(omloop):
     fig = px.timeline(omloop, x_start="starttijd datum", x_end="eindtijd datum", y="omloop nummer", color="activiteit")
     fig.update_yaxes(tickmode='linear', tick0=1, dtick=1, autorange="reversed", showgrid=True, gridcolor='lightgray', gridwidth=1)
     fig.update_xaxes(tickformat="%H:%M", showgrid=True, gridcolor="lightgray", gridwidth = 1)
+    # fig.update_layout(
+    #     legend=dict(
+    #         orientation="h", 
+    #         yanchor="bottom",  
+    #         y=1.1,  
+    #         xanchor="right", 
+    #         x=1 
+    #     )
+    # )
     fig.update_layout(
-        legend=dict(
-            orientation="h", 
-            yanchor="bottom",  
-            y=1.1,  
-            xanchor="right", 
-            x=1 
-        )
-    )
-    fig.update_layout(
-            title=dict(text="Gantt chart of the given bus planning", font=dict(size=25))
+    title=dict(text="Gantt chart of the given bus planning", font=dict(size=25))
     )
     return st.plotly_chart(fig)

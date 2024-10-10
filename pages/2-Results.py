@@ -20,6 +20,7 @@ def mainFunction():
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
     check_SOC(omloop, st.session_state["SOHs"])
     Gantt_chart(omloop)
+    st.write(omloop)
 
     if st.button("Export all used data to Excel"):
         st.write("Yippie")
