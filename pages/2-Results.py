@@ -18,7 +18,7 @@ def mainFunction():
     Check_dienstregeling(Dienstregeling, omloop)
     oplaadtijd(omloop)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
-    check_SOC(omloop, st.session_state["SOHs"])
+    check_SOC(omloop, Soh)
     Gantt_chart(omloop)
     st.write(omloop)
 

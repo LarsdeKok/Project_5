@@ -21,14 +21,6 @@ def duur_activiteiten(omloop):
 
 
 def aanpassingen_op_omloop(omloop, Soh):
-    omloop = duur_activiteiten(omloop)
-    omloop = omloop.merge(Soh ,left_on = omloop[omloop.columns[len(omloop.columns)-2]], right_on = Soh.index)
-    omloop = omloop.drop(omloop.columns[[0]], axis=1)
-    omloop.columns.values[0] = "rijnummer"
-    omloop.columns.values[len(omloop.columns)-1] = "SOH"
-    omloop['starttijd'] = pd.to_datetime(omloop['starttijd'], format='%H:%M:%S').dt.time
-    omloop['eindtijd'] = pd.to_datetime(omloop['eindtijd'], format='%H:%M:%S').dt.time
-
     rows = []
     for i in range(len(omloop) - 1):
         rows.append(omloop.iloc[i])
@@ -39,11 +31,20 @@ def aanpassingen_op_omloop(omloop, Soh):
                 'activiteit': "idle",
                 'eindtijd datum': omloop.iloc[i+1]["starttijd datum"], 
                 'starttijd datum': omloop.iloc[i]["eindtijd datum"],
-                'omloop nummer' : omloop.iloc[i]["omloop nummer"]
+                'omloop nummer' : omloop.iloc[i]["omloop nummer"],
+                "energieverbruik": 0.01
             })
             rows.append(gap_row)
     rows.append(omloop.iloc[-1])
     omloop = pd.concat([pd.DataFrame([row]) for row in rows], ignore_index=True)
+    
+    omloop = duur_activiteiten(omloop)
+    omloop = omloop.merge(Soh ,left_on = omloop[omloop.columns[len(omloop.columns)-2]], right_on = Soh.index)
+    omloop = omloop.drop(omloop.columns[[0]], axis=1)
+    omloop.columns.values[0] = "rijnummer"
+    omloop.columns.values[len(omloop.columns)-1] = "SOH"
+    omloop['starttijd'] = pd.to_datetime(omloop['starttijd'], format='%H:%M:%S').dt.time
+    omloop['eindtijd'] = pd.to_datetime(omloop['eindtijd'], format='%H:%M:%S').dt.time
     return omloop
 
 
