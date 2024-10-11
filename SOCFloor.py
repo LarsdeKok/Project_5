@@ -2,6 +2,10 @@ import pandas as pd
 import streamlit as st
         
 def check_SOC(omloopplanning, SOH):
+    '''
+    Checks if the SOC of all busses gets below the minimal value
+    and returns a DataFrame containing the rows in which a bus has an unallowed SOC value
+    '''
     capaciteit = 300
     SOC_kolom = []
     omloopplanning['min_batterij (kW)'] = 0
