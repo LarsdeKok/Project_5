@@ -35,7 +35,7 @@ def doTheChecks(inputfields):
     st.session_state['SOHs'] = inputfields
     st.session_state['FormFilled'] = True
 
-    st.switch_page("pages/Results.py")
+    st.switch_page("pages/2-Results.py")
 
 if 'FormFilled' not in st.session_state:
     dienstregeling = st.file_uploader('Time table', type=['xlsx'],accept_multiple_files=False)
