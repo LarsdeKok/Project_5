@@ -19,7 +19,7 @@ def mainFunction():
     oplaadtijd(omloop)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
     check_SOC(omloop, Soh)
-    Gantt_chart(omloop)
+    Gantt_chart(omloop=omloop)
     st.write(omloop)
 
     if st.button("Export all used data to Excel"):

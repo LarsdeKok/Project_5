@@ -88,20 +88,23 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
     else:
         st.write("✓) All bus rides will be driven on time, given your bus planning.")
 
+
 def Gantt_chart(omloop):
-    fig = px.timeline(omloop, x_start="starttijd datum", x_end="eindtijd datum", y="omloop nummer", color="activiteit")
+    st.write(omloop)
+    omloop['starttijd datum'] = pd.to_datetime(omloop['starttijd datum'])
+    omloop['eindtijd datum'] = pd.to_datetime(omloop['eindtijd datum'])
+    omloop['unique_event'] = omloop.index.astype(str) + '_' + omloop['activiteit']
+
+    fig = px.timeline(
+        omloop, 
+        x_start="starttijd datum", 
+        x_end="eindtijd datum", 
+        y="omloop nummer",
+        color="activiteit",
+        hover_name="activiteit",
+        hover_data=["starttijd datum", "eindtijd datum"] 
+    )
     fig.update_yaxes(tickmode='linear', tick0=1, dtick=1, autorange="reversed", showgrid=True, gridcolor='lightgray', gridwidth=1)
     fig.update_xaxes(tickformat="%H:%M", showgrid=True, gridcolor="lightgray", gridwidth = 1)
-    # fig.update_layout(
-    #     legend=dict(
-    #         orientation="h", 
-    #         yanchor="bottom",  
-    #         y=1.1,  
-    #         xanchor="right", 
-    #         x=1 
-    #     )
-    # )
-    fig.update_layout(
-    title=dict(text="Gantt chart of the given bus planning", font=dict(size=25))
-    )
+    fig.update_layout(title=dict(text="Gantt chart of the given bus planning", font=dict(size=25)))
     return st.plotly_chart(fig)
