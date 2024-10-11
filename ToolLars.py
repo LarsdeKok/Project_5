@@ -90,7 +90,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
 
 
 def Gantt_chart(omloop):
-    omloop = omloop.drop(omloop[omloop["diff"] > pd.Timedelta(hours=1)].index)
+    omloop = omloop.drop(omloop[omloop["diff"] > pd.Timedelta(hours = 1.5)].index)
     omloop = omloop.drop(omloop[omloop["diff"] >= pd.Timedelta(days = 1)].index)
     omloop = omloop.drop(omloop[omloop["diff2"] < 0].index)
     omloop['starttijd datum'] = pd.to_datetime(omloop['starttijd datum'])
@@ -100,6 +100,12 @@ def Gantt_chart(omloop):
     fig.update_yaxes(tickmode='linear', tick0=1, dtick=1, autorange="reversed", showgrid=True, gridcolor='lightgray', gridwidth=1)
     fig.update_xaxes(tickformat="%H:%M", showgrid=True, gridcolor="lightgray", gridwidth = 1)
     fig.update_layout(
-    title=dict(text="Gantt chart of the given bus planning", font=dict(size=25))
+    title=dict(text="Gantt chart of the given bus planning", font=dict(size=30))
     )
+    fig.update_layout(legend=dict(
+    yanchor="bottom",
+    y=0.01,
+    xanchor="right",
+    x=0.999
+))
     return st.plotly_chart(fig)
