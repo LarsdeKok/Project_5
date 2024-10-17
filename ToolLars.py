@@ -56,7 +56,7 @@ def oplaadtijd(omloop):
             st.write("The following charges times are to short.")
             st.write(pd.DataFrame(tekortopladen))
     else:
-        st.write("✓) All busses get charged sufficiently long.")
+        st.success("✓) All busses get charged sufficiently long.")
 
 
 def Check_dienstregeling(connexxion_df, omloopplanning_df):
@@ -88,7 +88,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             st.write("The following bus rides won't be driven given your bus planning.")
             st.write(pd.DataFrame(uncovered_rides))
     else:
-        st.write("✓) All rides will be driven given your bus plannning.")
+        st.success("✓) All rides will be driven given your bus plannning.")
 
 
 def Gantt_chart(omloop):
