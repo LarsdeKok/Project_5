@@ -51,11 +51,12 @@ def aanpassingen_op_omloop(omloop, Soh):
 def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
-    if len(tekortopladen.index) > 0:
-        st.write(f"The following charge times are to short.")
-        st.write(tekortopladen[["starttijd","eindtijd","activiteit","omloop nummer"]])
+    if len(tekortopladen) > 0:
+        with st.expander(f"There are {len(tekortopladen)} different times a bus is charged to short."):
+            st.write("The following charges times are to short.")
+            st.write(pd.DataFrame(tekortopladen))
     else:
-        st.write("✓) Each bus is charged for at least 15 minutes.")
+        st.write("✓) All busses get charged sufficiently long.")
 
 
 def Check_dienstregeling(connexxion_df, omloopplanning_df):
@@ -81,12 +82,13 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
         
         if not ride_covered:
             uncovered_rides.append(ride)
-    
-    if uncovered_rides:
-        st.write("The following rides won't be driven, given your bus planning.")
-        st.write(pd.DataFrame(uncovered_rides))
+
+    if len(uncovered_rides) > 0:
+        with st.expander(f"The time table contains {len(uncovered_rides)} errors."):
+            st.write("The following bus rides won't be driven given your bus planning.")
+            st.write(pd.DataFrame(uncovered_rides))
     else:
-        st.write("✓) All bus rides will be driven on time, given your bus planning.")
+        st.write("✓) All rides will be driven given your bus plannning.")
 
 
 def Gantt_chart(omloop):
@@ -107,5 +109,5 @@ def Gantt_chart(omloop):
     y=0.01,
     xanchor="right",
     x=0.999
-))
+    ))
     return st.plotly_chart(fig)

@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+
 from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop, Check_dienstregeling, Gantt_chart
 from ToolBram import Berekinging_EngergieVerbruik
 from SOCFloor import check_SOC
@@ -21,6 +22,7 @@ def mainFunction():
     check_SOC(omloop, Soh)
     Gantt_chart(omloop)
     st.write(omloop)
+
 
     if st.button("Export all used data to Excel"):
         st.write("Yippie")
