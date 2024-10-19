@@ -16,3 +16,14 @@ def mainFunction():
     afstandsmatrix = st.session_state["Afstandsmatrix"]
     aantallen = aantal_bussen(omloop)
     generate_values(aantallen)
+
+
+
+
+
+# soh					Int inputfield(s)
+# min baterijlevel			Int inputfield
+# baterijlevel start			Int inputfield
+# tempo v.d. ritten (rijdend verbruik)	slider
+# laadsnelheid				Int inputfield
+# stilstaand verbruik			slider
