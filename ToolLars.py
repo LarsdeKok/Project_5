@@ -5,6 +5,7 @@ import scipy.stats as sp
 import numpy as np
 import streamlit as st
 import plotly.express as px
+import datetime
 
 
 def aantal_bussen(planning):
@@ -58,11 +59,20 @@ def oplaadtijd(omloop):
     else:
         st.success("✓) All busses get charged sufficiently long.")
 
+def parse_time(value):
+    if isinstance(value, datetime.time):
+        # If the value is already a datetime.time object, return it as is
+        return value
+    try:
+        return pd.to_datetime(value, format='%H:%M').time()
+    except ValueError:
+        return pd.to_datetime(value, format='%H:%M:%S').time()
 
 def Check_dienstregeling(connexxion_df, omloopplanning_df):
-    connexxion_df['vertrektijd'] = pd.to_datetime(connexxion_df['vertrektijd'], format='%H:%M').dt.time
-    omloopplanning_df['starttijd'] = pd.to_datetime(omloopplanning_df['starttijd'], format='%H:%M:%S').dt.time
-    omloopplanning_df['eindtijd'] = pd.to_datetime(omloopplanning_df['eindtijd'], format='%H:%M:%S').dt.time
+    # Apply the function to the relevant columns only if they are not already datetime.time
+    connexxion_df['vertrektijd'] = connexxion_df['vertrektijd'].apply(parse_time)
+    omloopplanning_df['starttijd'] = omloopplanning_df['starttijd'].apply(parse_time)
+    omloopplanning_df['eindtijd'] = omloopplanning_df['eindtijd'].apply(parse_time)
     
     uncovered_rides = []
     
