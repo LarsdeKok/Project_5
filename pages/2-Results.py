@@ -13,7 +13,7 @@ def mainFunction():
     Soh = st.session_state["SOHs"]
     Dienstregeling = st.session_state["Dienstregeling"]
     afstandsmatrix = st.session_state["Afstandsmatrix"]
-    st.markdown("Planning Checker")
+    st.markdown("# Results")
     omloop = aanpassingen_op_omloop(omloop,Soh)
     Check_dienstregeling(Dienstregeling, omloop)
     oplaadtijd(omloop)
