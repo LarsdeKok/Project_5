@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import io
 
 from ToolLars import duur_activiteiten, oplaadtijd, aanpassingen_op_omloop, Check_dienstregeling, Gantt_chart
 from ToolBram import Berekinging_EngergieVerbruik
@@ -20,11 +21,17 @@ def mainFunction():
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
     check_SOC(omloop, Soh)
     Gantt_chart(omloop)
-    if st.button("Export all used data to Excel"):
-        st.write("Yippie")
-        #Export functie aanroepen
-    ## Hier volgende functies achter plakken
 
+    buffer = io.BytesIO()
+    omloop.to_excel(buffer, index=False)
+    buffer.seek(0)
+    st.download_button(
+        label="Export all used data to Excel",
+        data=buffer,
+        file_name="Processed_data.xlsx",
+        mime="application/vnd.ms-excel",
+        key="Download - excel"
+    )
 
 if 'FormFilled' not in st.session_state:
     st.write("Please upload your files first.")
