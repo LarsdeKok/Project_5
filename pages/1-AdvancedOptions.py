@@ -32,7 +32,7 @@ def mainFunction():
         with st.container(height=(115)):
             st.session_state["idle_usage"] = st.slider("Choose the idle battery usage (kW):", 0.0, 1.0, 0.1)
         with st.container(height=(115)):
-            st.session_state["Charge_speed"] = st.slider("Choose the charging speed (MW):", 300, 600, 450)
+            st.session_state["Charge_speed"] = st.slider("Choose the charging speed (kWh):", 300, 600, 450)
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.success("Everything adjusted successfuly")
