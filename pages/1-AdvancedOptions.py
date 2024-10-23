@@ -14,6 +14,7 @@ def generate_values(aantallen):
     return pd.DataFrame.from_dict(inputfields, orient="index")
 
 def mainFunction():
+    st.markdown("# Advanced Options")
     Dienstregeling = st.session_state["Dienstregeling"]
     afstandsmatrix = st.session_state["Afstandsmatrix"]
     omloop = st.session_state["Omloop"]
