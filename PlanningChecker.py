@@ -32,6 +32,11 @@ def generate_values(aantallen):
 def doTheChecks(inputfields):
     st.session_state['SOHs'] = inputfields
     st.session_state['FormFilled'] = True
+    st.session_state["Minimal_battery"] = 10
+    st.session_state["Startday_battery"] = 90
+    st.session_state["verbruik_rijdend"] = 1.2  
+    st.session_state["idle_usage"] = 0.1
+    st.session_state["Charge_speed"] = 450
 
     st.switch_page("pages/2-Results.py")
 
@@ -43,10 +48,19 @@ if 'FormFilled' not in st.session_state:
     if dienstregeling is not None and omloop is not None:
         # Ask if the user wants to use advanced options
         use_advanced = st.checkbox("Use advanced options")
-
+        st.session_state["use_advanced"] = use_advanced
         # Submit button for file uploads
         if st.button("Submit files"):
             if use_advanced:
+                st.session_state['FormFilled'] = True
+                dfomloop=pd.read_excel(omloop)
+                dfdienst=pd.read_excel(dienstregeling)
+                dfafstand = pd.read_excel(dienstregeling, "Afstandsmatrix")
+
+                st.session_state['Omloop'] = dfomloop
+                st.session_state['Dienstregeling'] = dfdienst
+                st.session_state["Afstandsmatrix"] = dfafstand
+
                 # Redirect to the advanced options page
                 st.switch_page("pages/1-AdvancedOptions.py")
             else:
