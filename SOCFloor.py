@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import numpy as np
 
 def intervals(df:pd.DataFrame)->pd.DataFrame:
     '''
@@ -24,6 +25,19 @@ def intervals(df:pd.DataFrame)->pd.DataFrame:
     out['omloop nummer']=omloop
     out['starttijd']=starttijd
     out['eindtijd']=eindtijd
+    out['starttijd'] = pd.to_datetime(out['starttijd'], format='%H:%M:%S')
+    out['eindtijd'] = pd.to_datetime(out['eindtijd'], format='%H:%M:%S')
+
+    out['starttijd']=np.where(
+        out['starttijd'].dt.second == 0,
+        out['starttijd'].dt.strftime('%H:%M'),
+        out['starttijd'].dt.strftime('%H:%M:%S')
+    )
+    out['eindtijd']=np.where(
+        out['eindtijd'].dt.second == 0,
+        out['eindtijd'].dt.strftime('%H:%M'),
+        out['eindtijd'].dt.strftime('%H:%M:%S')
+    )
     return out
 
 
@@ -43,7 +57,7 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
         if isinstance(SOH, list):
             max_batterij = float(SOH[i - 1]) / 100 * capaciteit
         elif isinstance(SOH, pd.DataFrame):
-            max_batterij = float(SOH.iloc[i - 1]) / 100 * capaciteit
+            max_batterij = float(SOH.iloc[i - 1].iloc[0]) / 100 * capaciteit
         else:
             raise Exception("Something went wrong with the SOH")
 

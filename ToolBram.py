@@ -25,7 +25,7 @@ def afstandcode_maken(omloopplanning, my_bar, bar_increment, current_progress):
     '''
     omloopplanning['afstandcode']=''
     for i in range(len(omloopplanning)):
-        omloopplanning['afstandcode'][i]=f"{omloopplanning['startlocatie'][i]}{omloopplanning['eindlocatie'][i]}{omloopplanning['buslijn'][i]}"
+        omloopplanning.loc[i, 'afstandcode']=f"{omloopplanning['startlocatie'][i]}{omloopplanning['eindlocatie'][i]}{omloopplanning['buslijn'][i]}"
         my_bar.progress(current_progress+(i/100)*bar_increment, f'Recalculating distances and energy-usage: {100*(current_progress+(i/100)*bar_increment):.1f}%')
 
 def energieverbruik_berekenen(omloopplanning, afstand:dict, rijdend_verbruik:float, stilstaand_verbruik:float, laadsnelheid:float, my_bar, bar_increment:float, current_progress:float):
