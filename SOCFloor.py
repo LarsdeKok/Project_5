@@ -85,4 +85,4 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
         #st.write(soc_tolow)
         #st.write("In the following rows the bus gets below the minimum battery level")
     else:
-        st.success("✓) All busses stay above the minimum battery level")
+        st.success("✓) All busses stay above the minimum battery level.")

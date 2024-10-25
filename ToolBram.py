@@ -48,6 +48,16 @@ def energieverbruik_berekenen(omloopplanning, afstand:dict, rijdend_verbruik:flo
 
 def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idle_use, Chargespeed):
     # Progress bar
+    st.markdown(
+        """
+        <style>
+        .stProgress > div > div > div > div {
+            background-color: green;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     my_bar=st.progress(0, "Recalculating distances and energy-usage.")
     total=(3*len(omloopplanning)+len(afstandsmatrix))
     bar_increment=100/total
