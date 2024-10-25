@@ -46,16 +46,16 @@ def energieverbruik_berekenen(omloopplanning, afstand:dict, rijdend_verbruik:flo
             omloopplanning.loc[i, 'energieverbruik2']=(afstand[omloopplanning['afstandcode'][i]]/1000)*rijdend_verbruik
         my_bar.progress(current_progress+(i/100)*bar_increment, f'Recalculating distances and energy-usage: {100*(current_progress+(i/100)*bar_increment):.1f}%')
 
-def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix):
+def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idle_use, Chargespeed):
     # Progress bar
     my_bar=st.progress(0, "Recalculating distances and energy-usage.")
     total=(3*len(omloopplanning)+len(afstandsmatrix))
     bar_increment=100/total
     
     # Defining parameters
-    rijdend_verbruik=1.2 # kW per kilometer
-    stilstaand_verbruik=0.01 # Altijd (onafhankelijk van tijd)
-    laadsnelheid=450 # kW per uur
+    rijdend_verbruik=driving_use # kW per kilometer
+    stilstaand_verbruik=idle_use # Altijd (onafhankelijk van tijd)
+    laadsnelheid=Chargespeed # kW per uur
 
     # Fill blanks in 'Buslijn' with 'materiaalrit'
     afstandsmatrix = afstandsmatrix.fillna('materiaalrit')

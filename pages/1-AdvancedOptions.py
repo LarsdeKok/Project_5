@@ -31,7 +31,7 @@ def mainFunction():
         with st.container(height=(115)):
             st.session_state["verbruik_rijdend"] = st.slider("Set the driving battery usage (kW/km):", 0.0, 4.0, 1.2)
         with st.container(height=(115)):
-            st.session_state["idle_usage"] = st.slider("Set the idle battery usage (kW):", 0.0, 1.0, 0.1)
+            st.session_state["idle_usage"] = st.slider("Set the idle battery usage (kW):", 0.0, 0.10, 0.01)
         with st.container(height=(115)):
             st.session_state["Charge_speed"] = st.slider("Choose the charging speed (kW/h):", 300, 600, 450)
         submitted = st.form_submit_button("Submit")
