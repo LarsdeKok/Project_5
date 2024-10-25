@@ -79,10 +79,16 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
     soc_tolow = omloopplanning[["rijnummer", "startlocatie", "starttijd", "eindtijd", "omloop nummer", "min_batterij (kW)","SOC (kW)"]][omloopplanning["Below_min_SOC"]==True]
     if len(soc_tolow) > 0:
         output=intervals(soc_tolow)
-        expander=st.expander(f"There are {len(output)} intervals where a bus is below the minimum SOC value")
-        #expander.write("The following busses get below their minimum battery level")
+        
+        st.markdown(
+            f'<div style="background-color:#fdd; border-left:4px solid #f44336; padding: 10px;">'
+            f'<strong>There are {len(output)} intervals where a bus is below the minimum SOC value.</strong>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+        
+        expander = st.expander("Click for more information.")
         expander.write(output)
-        #st.write(soc_tolow)
-        #st.write("In the following rows the bus gets below the minimum battery level")
+
     else:
         st.success("✓) All busses stay above the minimum battery level.")
