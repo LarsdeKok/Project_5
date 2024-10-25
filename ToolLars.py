@@ -64,7 +64,6 @@ def oplaadtijd(omloop):
 
 def parse_time(value):
     if isinstance(value, datetime.time):
-        # If the value is already a datetime.time object, return it as is
         return value
     try:
         return pd.to_datetime(value, format='%H:%M').time()

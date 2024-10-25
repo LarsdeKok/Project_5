@@ -10,16 +10,22 @@ from SOCFloor import check_SOC
 st.set_page_config(page_title="Results", page_icon="📈")
 
 def mainFunction():
+    minbat = st.session_state["Minimal_battery"]
+    startbat = st.session_state["Startday_battery"]
+    driving_use = st.session_state["verbruik_rijdend"]
+    idle_use = st.session_state["idle_usage"]
+    Chargespeed = st.session_state["Charge_speed"]
     omloop = st.session_state["Omloop"]
     Soh = st.session_state["SOHs"]
     Dienstregeling = st.session_state["Dienstregeling"]
     afstandsmatrix = st.session_state["Afstandsmatrix"]
+
     st.markdown("# Results")
     omloop = aanpassingen_op_omloop(omloop,Soh)
     Check_dienstregeling(Dienstregeling, omloop)
     oplaadtijd(omloop)
-    Berekinging_EngergieVerbruik(omloop, afstandsmatrix)
-    check_SOC(omloop, Soh)
+    Berekinging_EngergieVerbruik(omloop, afstandsmatrix, driving_use, idle_use, Chargespeed)
+    check_SOC(omloop, Soh, minbat, startbat)
     Gantt_chart(omloop)
 
     buffer = io.BytesIO()
