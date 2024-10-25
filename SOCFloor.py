@@ -88,7 +88,7 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
         )
         
         expander = st.expander("Click for more information.")
-        expander.write(output)
+        expander.write(output.to_html(index=False), unsafe_allow_html=True)
 
     else:
         st.success("✓) All busses stay above the minimum battery level.")
