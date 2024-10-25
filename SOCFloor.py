@@ -28,7 +28,7 @@ def intervals(df:pd.DataFrame)->pd.DataFrame:
 
 
         
-def check_SOC(omloopplanning, SOH):
+def check_SOC(omloopplanning, SOH, minbat, startbat):
     '''
     Checks if the SOC of all busses gets below the minimal value
     and returns a DataFrame containing the rows in which a bus has an unallowed SOC value
@@ -47,8 +47,8 @@ def check_SOC(omloopplanning, SOH):
         else:
             raise Exception("Something went wrong with the SOH")
 
-        batterij_start = 0.9 * max_batterij  # Assume battery is charged to 90%
-        min_batterij = 0.1 * max_batterij  # Minimum allowed battery level
+        batterij_start = (startbat/100) * max_batterij  # Battery level after charging
+        min_batterij = (minbat/100) * max_batterij  # Minimum allowed battery level
         omloopplanning.loc[omloopplanning['omloop nummer'] == i, 'min_batterij (kW)'] = min_batterij
 
         # Loop over each row in df

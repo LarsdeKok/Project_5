@@ -43,12 +43,7 @@ def energieverbruik_berekenen(omloopplanning, afstand:dict, rijdend_verbruik:flo
         else:
             omloopplanning['energieverbruik2'][i]=(afstand[omloopplanning['afstandcode'][i]]/1000)*rijdend_verbruik
 
-def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix):
-    # Defining parameters
-    rijdend_verbruik=1.2 # kW per kilometer
-    stilstaand_verbruik=0.01 # Altijd (onafhankelijk van tijd)
-    laadsnelheid=450 # kW per uur
-
+def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, rijdend_verbruik, stilstaand_verbruik, laadsnelheid):
     # Fill blanks in 'Buslijn' with 'materiaalrit'
     afstandsmatrix = afstandsmatrix.fillna('materiaalrit')
 
