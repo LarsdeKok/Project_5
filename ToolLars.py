@@ -22,23 +22,26 @@ def duur_activiteiten(omloop):
 
 
 def aanpassingen_op_omloop(omloop, Soh):
-    rows = []
-    for i in range(len(omloop) - 1):
-        rows.append(omloop.iloc[i])
-        if omloop.iloc[i]['eindtijd'] != omloop.iloc[i + 1]['starttijd']:
-            gap_row = pd.Series({
-                'eindtijd': omloop.iloc[i+1]["starttijd"], 
-                'starttijd': omloop.iloc[i]["eindtijd"],
-                'activiteit': "idle",
-                'eindtijd datum': omloop.iloc[i+1]["starttijd datum"], 
-                'starttijd datum': omloop.iloc[i]["eindtijd datum"],
-                'omloop nummer' : omloop.iloc[i]["omloop nummer"],
-                "energieverbruik": 0.01
-            })
-            rows.append(gap_row)
-    rows.append(omloop.iloc[-1])
-    omloop = pd.concat([pd.DataFrame([row]) for row in rows], ignore_index=True)
-    
+    all_rows = []
+    for omloop_nummer, group in omloop.groupby('omloop nummer'):
+        rows = []
+        for i in range(len(group) - 1):
+            rows.append(group.iloc[i])
+            if group.iloc[i]['eindtijd'] != group.iloc[i + 1]['starttijd']:
+                gap_row = pd.Series({
+                    'eindtijd': group.iloc[i+1]["starttijd"], 
+                    'starttijd': group.iloc[i]["eindtijd"],
+                    'activiteit': "idle",
+                    'eindtijd datum': group.iloc[i+1]["starttijd datum"], 
+                    'starttijd datum': group.iloc[i]["eindtijd datum"],
+                    'omloop nummer': group.iloc[i]["omloop nummer"],
+                    "energieverbruik": 0.01
+                })
+                rows.append(gap_row)
+        rows.append(group.iloc[-1])
+        all_rows.extend(rows)
+    omloop = pd.DataFrame(all_rows).reset_index(drop=True)
+
     omloop = duur_activiteiten(omloop)
     omloop = omloop.merge(Soh ,left_on = omloop[omloop.columns[len(omloop.columns)-2]], right_on = Soh.index)
     omloop = omloop.drop(omloop.columns[[0]], axis=1)
@@ -93,7 +96,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             uncovered_rides.append(ride)
 
     if len(uncovered_rides) > 0:
-        with st.expander(f"The time table contains {len(uncovered_rides)} errors."):
+        with st.container().error(st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
             st.write("The following bus rides won't be driven given your bus planning.")
             st.write(pd.DataFrame(uncovered_rides))
     else:
@@ -101,12 +104,8 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
 
 
 def Gantt_chart(omloop):
-    omloop = omloop.drop(omloop[omloop["diff"] > pd.Timedelta(hours = 1.5)].index)
-    omloop = omloop.drop(omloop[omloop["diff"] >= pd.Timedelta(days = 1)].index)
-    omloop = omloop.drop(omloop[omloop["diff2"] < 0].index)
     omloop['starttijd datum'] = pd.to_datetime(omloop['starttijd datum'])
     omloop['eindtijd datum'] = pd.to_datetime(omloop['eindtijd datum'])
-
     fig = px.timeline(omloop, x_start="starttijd datum", x_end="eindtijd datum", y="omloop nummer", color="activiteit")
     fig.update_yaxes(tickmode='linear', tick0=1, dtick=1, autorange="reversed", showgrid=True, gridcolor='lightgray', gridwidth=1)
     fig.update_xaxes(tickformat="%H:%M", showgrid=True, gridcolor="lightgray", gridwidth = 1)
