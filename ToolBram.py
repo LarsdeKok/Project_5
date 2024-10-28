@@ -63,9 +63,9 @@ def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idl
     bar_increment=100/total
     
     # Defining parameters
-    rijdend_verbruik=driving_use # kW per kilometer
-    stilstaand_verbruik=idle_use # Altijd (onafhankelijk van tijd)
-    laadsnelheid=Chargespeed # kW per uur
+    rijdend_verbruik=driving_use # kWh per kilometer
+    stilstaand_verbruik=idle_use # Always (independent of time)
+    laadsnelheid=Chargespeed # kW/h
 
     # Fill blanks in 'Buslijn' with 'materiaalrit'
     afstandsmatrix = afstandsmatrix.fillna('materiaalrit')
