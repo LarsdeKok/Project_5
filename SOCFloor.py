@@ -80,14 +80,15 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
     if len(soc_tolow) > 0:
         output=intervals(soc_tolow)
         
-        st.markdown(
-            f'<div style="background-color:#fdd; border-left:4px solid #f44336; padding: 10px;">'
-            f'<strong>There are {len(output)} intervals where a bus is below the minimum SOC value.</strong>'
-            f'</div>',
-            unsafe_allow_html=True
-        )
+        #st.markdown(
+        #    f'<div style="background-color:#fdd; border-left:4px solid #f44336; padding: 10px;">'
+        #    f'<strong>There are {len(output)} intervals where a bus is below the minimum SOC value.</strong>'
+        #    f'</div>',
+        #    unsafe_allow_html=True
+        #)
+        st.error(f"There are {len(output)} intervals where a bus is below the minimum SOC value.")
         
-        expander = st.expander("Click for more information.")
+        expander = st.expander("Click for more information on the intervals mentioned above.")
         expander.write(output.to_html(index=False), unsafe_allow_html=True)
 
     else:
