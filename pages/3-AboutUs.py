@@ -6,10 +6,19 @@ st.set_page_config(page_title="About us", page_icon="👥")
 
 st.title('About us')
 
-st.header('Project planning checker')
-st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+st.header('The team')
 
-st.header("Our team")
+st.write("""We are a dedicated team of four individuals—Lars, Jinne, Floar, and Bram—who came together for a school project, each bringing our unique skills and perspectives. Lars serves as our chairman, guiding our discussions and ensuring we stay on track with our goals.
+Our teamwork has been nothing short of exceptional, allowing us to tackle challenges effectively and support one another throughout the process. We are proud to call ourselves a top team, committed to delivering the best results possible.
+Currently, we are working on an exciting project called Planning Checker, which we will elaborate on in the following section.""")
+
+st.header('Project planning checker')
+st.write("""PlanningChecker is designed to see if the planning is complete and correct. Whether you're new to this type of software or an experienced user, this guide will help you navigate through the setup and usage processes for a smooth experience.
+With the transition to electric buses, bus scheduling has become more advanced. PlanningChecker is designed to ensure that every bus schedule meets these new requirements. The tool checks if al the routes will be drive and the busses don't get under their sufficient battery capacity.
+If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met.
+This makes it easier for planners to quickly identify and correct potential issues and minimizing errors in the scheduling process.
+""")
+st.header("Meet the team")
 
 col1, col2, col3, col4= st.columns(4)
 with col1:
