@@ -8,11 +8,11 @@ st.title('About us')
 
 st.header('The team')
 
-st.write("""We are a dedicated team of four individuals—Lars, Jinne, Floar, and Bram—who came together for a school project, each bringing our unique skills and perspectives. Lars serves as our chairman, guiding our discussions and ensuring we stay on track with our goals.
+st.write("""We are a dedicated team of four individuals—Lars, Jinne, Floor, and Bram—who came together for a school project, each bringing our unique skills and perspectives. Lars serves as our chairman, guiding our discussions and ensuring we stay on track with our goals.
 Our teamwork has been nothing short of exceptional, allowing us to tackle challenges effectively and support one another throughout the process. We are proud to call ourselves a top team, committed to delivering the best results possible.
-Currently, we are working on an exciting project called Planning Checker, which we will elaborate on in the following section.""")
+Currently, we are working on an exciting project called PlanningChecker, which we will elaborate on in the following section.""")
 
-st.header('Project planning checker')
+st.header('Project PlanningChecker')
 st.write("""PlanningChecker is designed to see if the planning is complete and correct. Whether you're new to this type of software or an experienced user, this guide will help you navigate through the setup and usage processes for a smooth experience.
 With the transition to electric buses, bus scheduling has become more advanced. PlanningChecker is designed to ensure that every bus schedule meets these new requirements. The tool checks if al the routes will be drive and the busses don't get under their sufficient battery capacity.
 If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met.
