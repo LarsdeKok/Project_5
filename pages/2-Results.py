@@ -28,6 +28,9 @@ def mainFunction():
     check_SOC(omloop, Soh, minbat, startbat)
     Gantt_chart(omloop)
 
+    omloop['starttijd datum'] = omloop['starttijd datum'].dt.strftime('%Y-%m-%d')
+    omloop['eindtijd datum'] = omloop['eindtijd datum'].dt.strftime('%Y-%m-%d')
+
     buffer = io.BytesIO()
     omloop.to_excel(buffer, index=False, sheet_name='PlanningCheckerData')
     buffer.seek(0)
