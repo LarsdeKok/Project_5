@@ -29,7 +29,7 @@ def mainFunction():
     Gantt_chart(omloop)
 
     buffer = io.BytesIO()
-    omloop.to_excel(buffer, index=False)
+    omloop.to_excel(buffer, index=False, sheet_name='PlanningCheckerData')
     buffer.seek(0)
     st.download_button(
         label="Export all used data to Excel",
