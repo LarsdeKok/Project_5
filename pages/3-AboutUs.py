@@ -8,7 +8,7 @@ st.title('About us')
 
 st.header('The team')
 
-st.write("""We are a dedicated team of four individuals—Lars, Jinne, Floar, and Bram—who came together for a school project, each bringing our unique skills and perspectives. Lars serves as our chairman, guiding our discussions and ensuring we stay on track with our goals.
+st.write("""We are a dedicated team of four individuals—Lars, Jinne, Floor, and Bram—who came together for a school project, each bringing our unique skills and perspectives. Lars serves as our chairman, guiding our discussions and ensuring we stay on track with our goals.
 Our teamwork has been nothing short of exceptional, allowing us to tackle challenges effectively and support one another throughout the process. We are proud to call ourselves a top team, committed to delivering the best results possible.
 Currently, we are working on an exciting project called Planning Checker, which we will elaborate on in the following section.""")
 
