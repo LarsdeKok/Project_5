@@ -58,10 +58,8 @@ def oplaadtijd(omloop):
         with st.expander(f"There are {len(tekortopladen)} different times a bus is charged to short."):
             st.write("The following charges times are to short.")
             st.write(pd.DataFrame(tekortopladen))
-        st.write("")
     else:
         st.success("✓) All busses get charged sufficiently long.")
-        st.write("")
 
 def parse_time(value):
     if isinstance(value, datetime.time):

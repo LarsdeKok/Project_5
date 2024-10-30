@@ -89,3 +89,4 @@ def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idl
     energieverbruik_berekenen(omloopplanning, afstand, rijdend_verbruik, stilstaand_verbruik, laadsnelheid, my_bar, bar_increment, current_progress)
     my_bar.empty()
     st.success('✓) Calculations complete.')
+    st.write("")
