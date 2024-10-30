@@ -13,10 +13,10 @@ Our teamwork has been nothing short of exceptional, allowing us to tackle challe
 Currently, we are working on an exciting project called PlanningChecker, which we will elaborate on in the following section.""")
 
 st.header('Project PlanningChecker')
-st.write("""PlanningChecker is designed to see if the planning is complete and correct. Whether you're new to this type of software or an experienced user, this guide will help you navigate through the setup and usage processes for a smooth experience.
-With the transition to electric buses, bus scheduling has become more advanced. PlanningChecker is designed to ensure that every bus schedule meets these new requirements. The tool checks if al the routes will be drive and the busses don't get under their sufficient battery capacity.
-If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met.
-This makes it easier for planners to quickly identify and correct potential issues and minimizing errors in the scheduling process.
+st.write("""PlanningChecker will check if your given bus planning is complete and correct.With the transition to electric busses, bus scheduling has become more advanced. 
+         PlanningChecker makes sure that every bus schedule meets these new requirements. The tool checks if all of the routes will be driven, the charging time of a bus is more than 15 minutes, 
+         the bus has an SOC-value above 10% and if the busses don't get under their minimal battery percentage. If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met. 
+         This makes it easier for planners to quickly identify and correct potential issues and minimizing errors in the scheduling process.
 """)
 st.header("Meet the team")
 
