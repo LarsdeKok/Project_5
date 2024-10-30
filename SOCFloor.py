@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import numpy as np
 
 def intervals(df:pd.DataFrame)->pd.DataFrame:
     '''
@@ -24,6 +25,19 @@ def intervals(df:pd.DataFrame)->pd.DataFrame:
     out['omloop nummer']=omloop
     out['starttijd']=starttijd
     out['eindtijd']=eindtijd
+    out['starttijd'] = pd.to_datetime(out['starttijd'], format='%H:%M:%S')
+    out['eindtijd'] = pd.to_datetime(out['eindtijd'], format='%H:%M:%S')
+
+    out['starttijd']=np.where(
+        out['starttijd'].dt.second == 0,
+        out['starttijd'].dt.strftime('%H:%M'),
+        out['starttijd'].dt.strftime('%H:%M:%S')
+    )
+    out['eindtijd']=np.where(
+        out['eindtijd'].dt.second == 0,
+        out['eindtijd'].dt.strftime('%H:%M'),
+        out['eindtijd'].dt.strftime('%H:%M:%S')
+    )
     return out
 
         
@@ -42,7 +56,7 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
         if isinstance(SOH, list):
             max_batterij = float(SOH[i - 1]) / 100 * capaciteit
         elif isinstance(SOH, pd.DataFrame):
-            max_batterij = float(SOH.iloc[i - 1]) / 100 * capaciteit
+            max_batterij = float(SOH.iloc[i - 1].iloc[0]) / 100 * capaciteit
         else:
             raise Exception("Something went wrong with the SOH")
 
@@ -64,10 +78,17 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
     soc_tolow = omloopplanning[["rijnummer", "startlocatie", "starttijd", "eindtijd", "omloop nummer", "min_batterij (kW)","SOC (kW)"]][omloopplanning["Below_min_SOC"]==True]
     if len(soc_tolow) > 0:
         output=intervals(soc_tolow)
-        expander=st.expander(f"There are {len(output)} intervals where a bus is below the minimum SOC value")
-        #expander.write("The following busses get below their minimum battery level")
-        expander.write(output)
-        #st.write(soc_tolow)
-        #st.write("In the following rows the bus gets below the minimum battery level")
+        
+        #st.markdown(
+        #    f'<div style="background-color:#fdd; border-left:4px solid #f44336; padding: 10px;">'
+        #    f'<strong>There are {len(output)} intervals where a bus is below the minimum SOC value.</strong>'
+        #    f'</div>',
+        #    unsafe_allow_html=True
+        #)
+        st.error(f"There are {len(output)} intervals where a bus is below the minimum SOC value.")
+        
+        expander = st.expander("Click for more information on the intervals mentioned above.")
+        expander.write(output.to_html(index=False), unsafe_allow_html=True)
+
     else:
-        st.success("✓) All busses stay above the minimum battery level")
+        st.success("✓) All busses stay above the minimum battery level.")
