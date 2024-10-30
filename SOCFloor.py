@@ -26,7 +26,6 @@ def intervals(df:pd.DataFrame)->pd.DataFrame:
     out['eindtijd']=eindtijd
     return out
 
-
         
 def check_SOC(omloopplanning, SOH, minbat, startbat):
     '''
