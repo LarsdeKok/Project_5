@@ -58,8 +58,10 @@ def oplaadtijd(omloop):
         with st.expander(f"There are {len(tekortopladen)} different times a bus is charged to short."):
             st.write("The following charges times are to short.")
             st.write(pd.DataFrame(tekortopladen))
+        st.write("")
     else:
         st.success("✓) All busses get charged sufficiently long.")
+        st.write("")
 
 def parse_time(value):
     if isinstance(value, datetime.time):
@@ -98,8 +100,10 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
         with st.container().error(st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
             st.write("The following bus rides won't be driven given your bus planning.")
             st.write(pd.DataFrame(uncovered_rides))
+        st.write("")
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
+        st.write("")
 
 
 def Gantt_chart(omloop):
