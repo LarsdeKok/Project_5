@@ -51,7 +51,7 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
     '''
     capaciteit = 300
     SOC_kolom = []
-    omloopplanning['min_batterij (kW)'] = 0
+    omloopplanning['min_batterij (kW)'] = minbat
 
     for i in range(1, max(omloopplanning['omloop nummer']) + 1):
         df = omloopplanning[omloopplanning['omloop nummer'] == i]
