@@ -129,7 +129,7 @@ def Gantt_chart(omloop):
 
 def format_check(omloop:pd.DataFrame):
     items = list(omloop.columns)
-    true_amount = items == ['0', 'startlocatie', 'eindlocatie', 'starttijd', 'eindtijd', 
+    true_amount = items == ['Unnamed: 0', 'startlocatie', 'eindlocatie', 'starttijd', 'eindtijd', 
             'activiteit', 'buslijn', 'energieverbruik', 
             'starttijd datum', 'eindtijd datum', 'omloop nummer']
     if true_amount:
