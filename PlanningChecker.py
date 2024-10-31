@@ -45,7 +45,7 @@ if 'FormFilled' not in st.session_state:
     dienstregeling = st.file_uploader('Time table', type=['xlsx'], accept_multiple_files=False)
     omloop = st.file_uploader('Bus planning', type=['xlsx'], accept_multiple_files=False)
     if omloop is not None:
-        format_check(pd.read_excel(omloop, index_col=0))
+        format_check(pd.read_excel(omloop))
     if dienstregeling is not None and omloop is not None:
         # Ask if the user wants to use advanced options
         use_advanced = st.checkbox("Use advanced options")
