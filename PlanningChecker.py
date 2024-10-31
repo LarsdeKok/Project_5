@@ -61,10 +61,10 @@ def doTheChecks(inputfields):
 
 
 
-"""
-Doorloopt alle nodige stappen op de startpagina en indien alles klopt zend de gebruiker door
-naar de results of AdvancedOptions pagina.
-"""
+# """
+# Doorloopt alle nodige stappen op de startpagina en indien alles klopt zend de gebruiker door
+# naar de results of AdvancedOptions pagina.
+# """
 
 if 'FormFilled' not in st.session_state:
     # File upload section
