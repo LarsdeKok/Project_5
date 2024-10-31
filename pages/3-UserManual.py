@@ -13,12 +13,14 @@ file_path = "Project_5_Manual.pdf"
 file_link = "https://drive.google.com/file/d/1kufRsWI7z0hi0TP6TAXBZRudChxBwCLZ/view?usp=sharing"
 
 
+
 def displayPDF(url):
     pdf_display = f'<iframe src="{url}" width="100%" height="1000" type="application/pdf"></iframe>'
     st.components.v1.html(pdf_display, height=1000)
 
-# Replace with the direct download link
-displayPDF("https://drive.google.com/uc?export=download&id=1kufRsWI7z0hi0TP6TAXBZRudChxBwCLZ")
+# Use Google Drive's preview link
+displayPDF("https://drive.google.com/file/d/1kufRsWI7z0hi0TP6TAXBZRudChxBwCLZ/preview")
+
 
 
 
