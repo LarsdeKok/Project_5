@@ -60,9 +60,9 @@ def oplaadtijd(omloop):
             st.write("The following charge times need to be longer")
             tekortopladen = tekortopladen[["starttijd", "eindtijd", "activiteit", "omloop nummer", "energieverbruik"]]
             st.write(pd.DataFrame(tekortopladen))
-        st.write("")
     else:
         st.success("✓) All busses get charged sufficiently long.")
+    st.write("")
 
 def parse_time(value):
     if isinstance(value, datetime.time):
