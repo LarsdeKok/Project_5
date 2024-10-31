@@ -94,14 +94,17 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
         if not ride_covered:
             uncovered_rides.append(ride)
 
-    if len(uncovered_rides) > 0:
-        with st.expander(f"The time table contains {len(uncovered_rides)} errors."):
-            st.write("The following bus rides won't be driven given your bus planning.")
-            st.write(pd.DataFrame(uncovered_rides))
-        st.write("")
+    if len(uncovered_rides) > 1:
+        st.error(f"There are {len(uncovered_rides)} rides that won't be driven")
+        st.expander("Click for more information on the rides mentioned above.")
+        st.expander(pd.DataFrame(uncovered_rides))
+    elif len(uncovered_rides) == 1:
+        st.error(f"There is 1 ride that won't be driven")
+        st.expander("Click for more information on the ride mentioned above.")
+        st.expander(pd.DataFrame(uncovered_rides))
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
-        st.write("")
+    st.write("")
 
 
 def Gantt_chart(omloop):
