@@ -55,8 +55,9 @@ def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen) > 0:
-        with st.expander(f"There are {len(tekortopladen)} times a bus is charged to short."):
-            st.write("The following charges times are to short.")
+        st.error(f"There are {len(tekortopladen)} times a bus is charged too short")
+        with st.expander("Click for more information on the charging times mentioned above."):
+            st.write("The following charge times need to be longer")
             st.write(pd.DataFrame(tekortopladen))
     else:
         st.success("✓) All busses get charged sufficiently long.")
