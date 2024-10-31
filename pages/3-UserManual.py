@@ -10,15 +10,17 @@ st.title('User manual')
 
 
 file_path = "Project_5_Manual.pdf"
+file_link = "https://drive.google.com/file/d/1kufRsWI7z0hi0TP6TAXBZRudChxBwCLZ/view?usp=sharing"
 
-def displayPDF(file_path):
-    with open(file_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="1000" type="application/pdf"></iframe>'
+import streamlit as st
+
+def displayPDF(url):
+    pdf_display = f'<iframe src="{url}" width="100%" height="1000" type="application/pdf"></iframe>'
     st.components.v1.html(pdf_display, height=1000)
 
-# Call with the correct file path
-displayPDF(file_path)  # Replace with the PDF file's name
+# Provide the direct link to the PDF hosted externally
+displayPDF(file_link)  # Replace with your public URL
+
 
 
 # def displayPDF(file):
