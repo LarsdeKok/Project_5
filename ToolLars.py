@@ -55,7 +55,7 @@ def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen) > 0:
-        with st.expander(f"There are {len(tekortopladen)} different times a bus is charged to short."):
+        with st.expander(f"There are {len(tekortopladen)} times a bus is charged to short."):
             st.write("The following charges times are to short.")
             st.write(pd.DataFrame(tekortopladen))
     else:
@@ -95,7 +95,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             uncovered_rides.append(ride)
 
     if len(uncovered_rides) > 0:
-        with st.container().error(st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
+        with st.expander(f"The time table contains {len(uncovered_rides)} errors."):
             st.write("The following bus rides won't be driven given your bus planning.")
             st.write(pd.DataFrame(uncovered_rides))
         st.write("")
