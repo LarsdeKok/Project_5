@@ -16,18 +16,15 @@ def intervals(df:pd.DataFrame)->pd.DataFrame:
             omloop.append(df['omloop nummer'].iloc[i])
             starttijd.append(df['starttijd'].iloc[i])
             new_interval=False
-        if i < len(df) - 1 and df['starttijd'].iloc[i + 1] != df['eindtijd'].iloc[i]:
+        elif i not in [0, len(df)-1] and df['starttijd'].iloc[i+1]!=df['eindtijd'].iloc[i]:
             eindtijd.append(df['eindtijd'].iloc[i])
-            new_interval = True
+            new_interval=True
         elif i==len(df)-1:
             eindtijd.append(df['eindtijd'].iloc[i])
-
-    out = pd.DataFrame({
-        'omloop nummer': omloop,
-        'starttijd': starttijd,
-        'eindtijd': eindtijd
-    })
-
+    out=pd.DataFrame()
+    out['omloop nummer']=omloop
+    out['starttijd']=starttijd
+    out['eindtijd']=eindtijd
     out['starttijd'] = pd.to_datetime(out['starttijd'], format='%H:%M:%S')
     out['eindtijd'] = pd.to_datetime(out['eindtijd'], format='%H:%M:%S')
 
