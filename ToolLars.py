@@ -60,7 +60,7 @@ def oplaadtijd(omloop):
             st.write("The following charge times need to be longer")
             pd.DataFrame(tekortopladen)
             st.write(tekortopladen)
-            st.write(tekortopladen = tekortopladen["starttijd", "eindtijd", "activiteit","omloop nummer", "energieverbruik2"])
+            st.write(tekortopladen["starttijd", "eindtijd", "activiteit","omloop nummer", "energieverbruik2"])
     else:
         st.success("✓) All busses get charged sufficiently long.")
 
