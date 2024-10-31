@@ -8,12 +8,32 @@ from ToolLars import aantal_bussen
 st.set_page_config(page_title="Advanced Options", page_icon="📈")
 
 def generate_values(aantallen):
+    """
+    Genereerd input velden voor het instellen van de SOH voor iedere bus
+
+    Returns
+    -------
+    Inputfields: Pandas DataFrame met als index omloop nummer/index en als waarde de
+    SOH van de desbetreffende bus.
+    """
+    
     inputfields = {}
     for i in aantallen:
         inputfields[int(i)] = st.number_input(f"Insert the SOH for bus {i}.", step=1, format="%d", min_value=10, max_value=100, value=90)
     return pd.DataFrame.from_dict(inputfields, orient="index")
 
 def mainFunction():
+    """
+    Laat de gebruikter geadvanceerde opties instellen met behulp van sliders en input
+    velden. Waaronder het volgende in te stellen is:
+        - SOH (State of Health) per bus,
+        - Minimale baterij percentage,
+        - Baterij percentage op het begin van de dag,
+        - Baterij verbruik gedurende de dag,
+        - Stilstaand baterij verbruik,
+        - Oplaadsnelheid.
+    """
+
     st.markdown("# Advanced Options")
     Dienstregeling = st.session_state["Dienstregeling"]
     afstandsmatrix = st.session_state["Afstandsmatrix"]

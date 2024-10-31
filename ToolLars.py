@@ -109,6 +109,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             st.write(pd.DataFrame(uncovered_rides))
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
+    st.write("")
 
 def Gantt_chart(omloop):
     omloop['starttijd datum'] = pd.to_datetime(omloop['starttijd datum'])

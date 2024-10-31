@@ -16,9 +16,9 @@ with open(file_path, "rb") as file:
 
 st.write("## PDF Preview")
 st.download_button(
-    label="Download Project 5 Manual",
+    label="Download PlanningChecker Manual",
     data=file_data,
-    file_name="Project_5_Manual.pdf",
+    file_name="PlanningChecker_Manual.pdf",
     mime="application/pdf"
 )
 with st.container(height=500):
