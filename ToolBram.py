@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import scipy.stats as sp
 import numpy as np
 import streamlit as st
@@ -90,3 +89,4 @@ def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idl
     energieverbruik_berekenen(omloopplanning, afstand, rijdend_verbruik, stilstaand_verbruik, laadsnelheid, my_bar, bar_increment, current_progress)
     my_bar.empty()
     st.success('✓) Calculations complete.')
+    st.write("")

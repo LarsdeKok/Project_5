@@ -28,7 +28,7 @@ with col1:
         <div style="background-color: #6e6e6e; padding: 10px; border-style:solid; border-width:2px; border-color:#404040; border-radius:5px;text-align:center;">
             <h5 style="color: white;">Bram Bleumink</h5>
             <i class="fa fa-github" style="font-size:30px; color: black;"></i><br>
-            <a href='https://github.com/Brimma' style="text-decoration:none; color: #003cff;"">Brimma</a>
+            <a href='https://github.com/Brimma' style="text-decoration:none; color: #003cff;"">See Github</a>
         </div>
         """, 
         unsafe_allow_html=True
@@ -40,7 +40,7 @@ with col2:
         <div style="background-color: #6e6e6e; padding: 10px; border-style:solid; border-width:2px; border-color:#404040; border-radius:5px;text-align:center;">
             <h5 style="color: white;">Jinne Haan<br></h5>
             <i class="fa fa-github" style="font-size:30px; color: black;"></i><br>
-            <a href='https://github.com/Jinne123' style="text-decoration:none; color: #003cff;"">Jinne123</a>
+            <a href='https://github.com/Jinne123' style="text-decoration:none; color: #003cff;"">See Github</a>
         </div>
         """, 
         unsafe_allow_html=True
@@ -52,7 +52,7 @@ with col3:
         <div style="background-color: #6e6e6e; padding: 10px; border-style:solid; border-width:2px; border-color:#404040; border-radius:5px;text-align:center;">
             <h5 style="color: white;">Lars de Kok<br></h5>
             <i class="fa fa-github" style="font-size:30px; color: black;"></i><br>
-            <a href='https://github.com/LarsdeKok' style="text-decoration:none; color: #003cff;"">LarsdeKok</a>
+            <a href='https://github.com/LarsdeKok' style="text-decoration:none; color: #003cff;"">See Github</a>
         </div>
         """, 
         unsafe_allow_html=True
@@ -64,7 +64,7 @@ with col4:
         <div style="background-color: #6e6e6e; padding: 10px; border-style:solid; border-width:2px; border-color:#404040; border-radius:5px;text-align:center;">
             <h5 style="color: white;">Floor van der Venne</h5>
             <i class="fa fa-github" style="font-size:30px; color: black;"></i><br>
-            <a href='https://github.com/FloorVanDerVenne' style="text-decoration:none; color: #003cff;">FloorVanDerVenne</a>
+            <a href='https://github.com/FloorVanDerVenne' style="text-decoration:none; color: #003cff;">See Github</a>
         </div>
         """, 
         unsafe_allow_html=True
