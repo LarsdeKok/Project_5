@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-from ToolLars import aantal_bussen
+from ToolLars import aantal_bussen, right_format
 
 st.set_page_config(
     page_title="Planning Checker",
@@ -44,7 +44,7 @@ if 'FormFilled' not in st.session_state:
     # File upload section
     dienstregeling = st.file_uploader('Time table', type=['xlsx'], accept_multiple_files=False)
     omloop = st.file_uploader('Bus planning', type=['xlsx'], accept_multiple_files=False)
-    
+    right_format(omloop)
     if dienstregeling is not None and omloop is not None:
         # Ask if the user wants to use advanced options
         use_advanced = st.checkbox("Use advanced options")

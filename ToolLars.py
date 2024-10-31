@@ -126,3 +126,13 @@ def Gantt_chart(omloop):
     x=0.999
     ))
     return st.plotly_chart(fig)
+
+def right_format(omloop:pd.DataFrame):
+    items = list(omloop.columns)
+    true_amount = items == ['startlocatie', 'eindlocatie', 'starttijd', 'eindtijd', 
+            'activiteit', 'buslijn', 'energieverbruik', 
+            'starttijd datum', 'eindtijd datum', 'omloop nummer']
+    if true_amount:
+        st.success("The uploaded bus planning has the right format")
+    if not true_amount:
+        st.error("The uploaded bus planning does not have the right format")
