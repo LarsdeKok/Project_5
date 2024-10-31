@@ -20,11 +20,11 @@ st.download_button(
 )
 
 file_path = "Project_5_Manual.pdf"
-file_link = "https://drive.google.com/file/d/1kufRsWI7z0hi0TP6TAXBZRudChxBwCLZ/view?usp=sharing"
+file_link = "https://drive.google.com/file/d/189_ccfKl5mTO1tch4SHrO0_C4MbOz73l/view?usp=sharing"
 
 def displayPDF(url):
     pdf_display = f'<iframe src="{url}" width="100%" height="1000" type="application/pdf"></iframe>'
     st.components.v1.html(pdf_display, height=1000)
 
 # Use Google Drive's preview link
-displayPDF("https://drive.google.com/file/d/1kufRsWI7z0hi0TP6TAXBZRudChxBwCLZ/preview")
+displayPDF("https://drive.google.com/file/d/189_ccfKl5mTO1tch4SHrO0_C4MbOz73l/preview")
