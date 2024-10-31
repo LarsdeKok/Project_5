@@ -96,9 +96,10 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             uncovered_rides.append(ride)
 
     if len(uncovered_rides) > 0:
-        with st.container().error(st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
-            st.write("The following bus rides won't be driven given your bus planning.")
-            st.write(pd.DataFrame(uncovered_rides))
+        with st.container():
+            with (st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
+                st.write("The following bus rides won't be driven given your bus planning.")
+                st.write(pd.DataFrame(uncovered_rides))
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
 
