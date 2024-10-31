@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from streamlit_pdf_viewer import pdf_viewer
+import base64
 
 st.set_page_config(page_title="User manual", page_icon="📖")
 
@@ -10,16 +11,9 @@ st.title('User manual')
 
 file_path = "Project_5_Manual.pdf"
 
-# Open het PDF-bestand en lees het in binair formaat
-with open(file_path, "rb") as file:
-    file_data = file.read()
-
-st.write("## PDF Preview")
-st.download_button(
-    label="Download PlanningChecker Manual",
-    data=file_data,
-    file_name="PlanningChecker_Manual.pdf",
-    mime="application/pdf"
-)
-with st.container(height=500):
-    pdf_viewer(file_path)
+def displayPDF(file):
+    with open(file, "rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="100%" height="1000" type="application/pdf">'
+    st.markdown(pdf_display, unsafe_allow_html=True)
+displayPDF(file_path)
