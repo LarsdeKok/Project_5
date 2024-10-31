@@ -16,7 +16,7 @@ def intervals(df:pd.DataFrame)->pd.DataFrame:
             omloop.append(df['omloop nummer'].iloc[i])
             starttijd.append(df['starttijd'].iloc[i])
             new_interval=False
-        elif i not in [0, len(df)-1] and df['starttijd'].iloc[i+1]!=df['eindtijd'].iloc[i]:
+        if i not in [0, len(df)-1] and df['starttijd'].iloc[i+1]!=df['eindtijd'].iloc[i]:
             eindtijd.append(df['eindtijd'].iloc[i])
             new_interval=True
         elif i==len(df)-1:
