@@ -18,8 +18,6 @@ st.download_button(
     mime="application/pdf"
 )
 
-file_path = "Project_5_Manual.pdf"
-file_link = "https://drive.google.com/file/d/189_ccfKl5mTO1tch4SHrO0_C4MbOz73l/view?usp=sharing"
 
 def displayPDF(url):
     pdf_display = f'<iframe src="{url}" width="100%" height="700" type="application/pdf"></iframe>'
