@@ -127,7 +127,7 @@ def Gantt_chart(omloop):
     ))
     return st.plotly_chart(fig)
 
-def right_format(omloop:pd.DataFrame):
+def format_check(omloop:pd.DataFrame):
     items = list(omloop.columns)
     true_amount = items == ['startlocatie', 'eindlocatie', 'starttijd', 'eindtijd', 
             'activiteit', 'buslijn', 'energieverbruik', 
