@@ -9,7 +9,7 @@ st.set_page_config(page_title="User manual", page_icon="📖")
 st.title('User manual')
 
 
-file_path = "Project_5_Manual.pdf"
+file_path = "PlanningChecker_Manual.pdf"
 
 def displayPDF(file):
     with open(file, "rb") as f:
