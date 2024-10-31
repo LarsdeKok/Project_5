@@ -14,7 +14,7 @@ We are a team committed to delivering the best results possible. Currently, we a
 st.header('Project PlanningChecker')
 st.write("""PlanningChecker will check if your given bus planning is complete and correct.
         Whether you're new to this type of software or an experienced user, this tool will help you check and improve your planning. 
-        With the transition to electric busses, bus scheduling has got more requirements. PlanningChecker makes sure that every bus schedule meets these new requirements.
+        With the transition to electric busses, bus scheduling has gotten more requirements. PlanningChecker makes sure that every bus schedule meets these new requirements.
         The tool checks if all of the given routes will be driven, if the charging time of a bus is more than 15 minutes and if the bus has an SOC-value (State of Charge-value) below the minimal value. 
         If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met. This makes it easier for planners to quickly identify and correct potential issues and minimizing errors in the scheduling process.
 """)
