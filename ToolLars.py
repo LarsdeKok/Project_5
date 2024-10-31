@@ -1,6 +1,5 @@
 ## if __name__== __main__ voor tests
 import pandas as pd
-import matplotlib.pyplot as plt
 import scipy.stats as sp
 import numpy as np
 import streamlit as st
@@ -96,12 +95,13 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             uncovered_rides.append(ride)
 
     if len(uncovered_rides) > 0:
-        with st.container():
-            with (st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
-                st.write("The following bus rides won't be driven given your bus planning.")
-                st.write(pd.DataFrame(uncovered_rides))
+        with st.container().error(st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
+            st.write("The following bus rides won't be driven given your bus planning.")
+            st.write(pd.DataFrame(uncovered_rides))
+        st.write("")
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
+        st.write("")
 
 
 def Gantt_chart(omloop):
