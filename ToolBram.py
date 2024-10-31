@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import scipy.stats as sp
 import numpy as np
 import streamlit as st
@@ -30,20 +29,20 @@ def afstandcode_maken(omloopplanning, my_bar, bar_increment, current_progress):
 
 def energieverbruik_berekenen(omloopplanning, afstand:dict, rijdend_verbruik:float, stilstaand_verbruik:float, laadsnelheid:float, my_bar, bar_increment:float, current_progress:float):
     '''
-    Creates a new column called 'energieverbruik2' which contains the newly calculated energy usage.
+    Creates a new column called 'energieverbruik' which contains the newly calculated energy usage.
     rijdend_verbruik is in kW/km
     stilstaand_verbruik is constant
     laadsnelheid is in kW/h
     '''
-    omloopplanning['energieverbruik2']=''
+    omloopplanning['energieverbruik']=''
     omloopplanning['diff2']=omloopplanning['diff'].dt.total_seconds() / 60
     for i in range(len(omloopplanning)):
         if 'idle' in omloopplanning['afstandcode'][i]:
-            omloopplanning.loc[i, 'energieverbruik2']=stilstaand_verbruik
+            omloopplanning.loc[i, 'energieverbruik']=stilstaand_verbruik
         elif 'opladen' in omloopplanning['afstandcode'][i]:
-            omloopplanning.loc[i, 'energieverbruik2']=(omloopplanning['diff2'][i]*laadsnelheid*-1)/60
+            omloopplanning.loc[i, 'energieverbruik']=(omloopplanning['diff2'][i]*laadsnelheid*-1)/60
         else:
-            omloopplanning.loc[i, 'energieverbruik2']=(afstand[omloopplanning['afstandcode'][i]]/1000)*rijdend_verbruik
+            omloopplanning.loc[i, 'energieverbruik']=(afstand[omloopplanning['afstandcode'][i]]/1000)*rijdend_verbruik
         my_bar.progress(current_progress+(i/100)*bar_increment, f'Recalculating distances and energy-usage: {100*(current_progress+(i/100)*bar_increment):.1f}%')
 
 def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idle_use, Chargespeed):
@@ -86,7 +85,8 @@ def Berekinging_EngergieVerbruik(omloopplanning,afstandsmatrix, driving_use, idl
     afstandcode_maken(omloopplanning, my_bar, bar_increment, current_progress)
     current_progress=((2*len(omloopplanning)+len(afstandsmatrix))/100)*bar_increment
     
-    # Add column energieverbruik2
+    # Add column energieverbruik
     energieverbruik_berekenen(omloopplanning, afstand, rijdend_verbruik, stilstaand_verbruik, laadsnelheid, my_bar, bar_increment, current_progress)
     my_bar.empty()
     st.success('✓) Calculations complete.')
+    st.write("")

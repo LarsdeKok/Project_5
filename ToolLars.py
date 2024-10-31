@@ -1,6 +1,5 @@
 ## if __name__== __main__ voor tests
 import pandas as pd
-import matplotlib.pyplot as plt
 import scipy.stats as sp
 import numpy as np
 import streamlit as st
@@ -56,11 +55,14 @@ def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen) > 0:
-        with st.expander(f"There are {len(tekortopladen)} different times a bus is charged to short."):
-            st.write("The following charges times are to short.")
+        st.error(f"There are {len(tekortopladen)} times a bus is charged too short")
+        with st.expander("Click for more information on the charging times mentioned above."):
+            st.write("The following charge times need to be longer")
+            tekortopladen = tekortopladen[["starttijd", "eindtijd", "activiteit", "omloop nummer", "energieverbruik"]]
             st.write(pd.DataFrame(tekortopladen))
     else:
         st.success("✓) All busses get charged sufficiently long.")
+    st.write("")
 
 def parse_time(value):
     if isinstance(value, datetime.time):
@@ -95,13 +97,19 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
         if not ride_covered:
             uncovered_rides.append(ride)
 
-    if len(uncovered_rides) > 0:
-        with st.container().error(st.expander(f"The time table contains {len(uncovered_rides)} errors.")):
-            st.write("The following bus rides won't be driven given your bus planning.")
+    if len(uncovered_rides) > 1:
+        st.error(f"There are {len(uncovered_rides)} rides that won't be driven")
+        with st.expander("Click for more information on the rides mentioned above."):
+            st.write("The following rides won't be driven given your bus planning")
+            st.write(pd.DataFrame(uncovered_rides))
+    elif len(uncovered_rides) == 1:
+        st.error(f"There is 1 ride that won't be driven")
+        with st.expander("Click for more information on the ride mentioned above."):
+            st.write("The following ride wont be driven given your bus planning")
             st.write(pd.DataFrame(uncovered_rides))
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
-
+    st.write("")
 
 def Gantt_chart(omloop):
     omloop['starttijd datum'] = pd.to_datetime(omloop['starttijd datum'])
@@ -119,3 +127,13 @@ def Gantt_chart(omloop):
     x=0.999
     ))
     return st.plotly_chart(fig)
+
+def format_check(omloop:pd.DataFrame):
+    items = list(omloop.columns)
+    true_amount = items == ['Unnamed: 0', 'startlocatie', 'eindlocatie', 'starttijd', 'eindtijd', 
+            'activiteit', 'buslijn', 'energieverbruik', 
+            'starttijd datum', 'eindtijd datum', 'omloop nummer']
+    if true_amount:
+        st.success("The uploaded bus planning has the right format")
+    if not true_amount:
+        st.error("The uploaded bus planning does not have the right format")
