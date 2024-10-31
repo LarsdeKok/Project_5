@@ -58,8 +58,8 @@ def oplaadtijd(omloop):
         st.error(f"There are {len(tekortopladen)} times a bus is charged too short")
         with st.expander("Click for more information on the charging times mentioned above."):
             st.write("The following charge times need to be longer")
-            tekortopladen = tekortopladen["starttijd", "eindtijd", "activiteit","omloop nummer", "energieverbruik2"]
-            st.write(pd.DataFrame(tekortopladen))
+            pd.DataFrame(tekortopladen)
+            st.write(tekortopladen = tekortopladen["starttijd", "eindtijd", "activiteit","omloop nummer", "energieverbruik2"])
     else:
         st.success("✓) All busses get charged sufficiently long.")
 
