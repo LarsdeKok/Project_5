@@ -75,7 +75,7 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
         
     omloopplanning['SOC (kW)'] = SOC_kolom
     omloopplanning['Below_min_SOC'] = omloopplanning['SOC (kW)'] < omloopplanning['min_batterij (kW)']
-    soc_tolow = omloopplanning[["rijnummer", "startlocatie", "starttijd", "eindtijd", "omloop nummer", "min_batterij (kW)","SOC (kW)"]][omloopplanning["Below_min_SOC"]==True]
+    soc_tolow = omloopplanning[["starttijd", "eindtijd", "omloop nummer"]][omloopplanning["Below_min_SOC"]==True]
     if len(soc_tolow) > 0:
         output=intervals(soc_tolow)
         
