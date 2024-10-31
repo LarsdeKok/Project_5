@@ -69,7 +69,7 @@ def check_SOC(omloopplanning, SOH, minbat, startbat):
             if idx == df.index[0]:  # First row of this omloop
                 SOC = batterij_start
             else:
-                SOC = SOC_kolom[-1] - row['energieverbruik2']  # Calculate SOC after energy consumption
+                SOC = SOC_kolom[-1] - row['energieverbruik']  # Calculate SOC after energy consumption
 
             SOC_kolom.append(SOC)
         
