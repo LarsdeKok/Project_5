@@ -23,8 +23,8 @@ def mainFunction():
     st.markdown("# Results")
     omloop = aanpassingen_op_omloop(omloop,Soh)
     Check_dienstregeling(Dienstregeling, omloop)
-    oplaadtijd(omloop)
     Berekinging_EngergieVerbruik(omloop, afstandsmatrix, driving_use, idle_use, Chargespeed)
+    oplaadtijd(omloop)
     check_SOC(omloop, Soh, minbat, startbat)
     Gantt_chart(omloop)
 
