@@ -12,10 +12,11 @@ st.write("""We are a team of four individuals—Lars, Jinne, Floor, and Bram—w
 We are a team committed to delivering the best results possible. Currently, we are working on a project called PlanningChecker, which we will elaborate on in the following section.""")
 
 st.header('Project PlanningChecker')
-st.write("""PlanningChecker will check if your given bus planning is complete and correct. Whether you're new to this type of software or an experienced user, this guide will help you navigate through the setup and usage processes for a smooth experience. 
-With the transition to electric busses, bus scheduling has become more advanced. PlanningChecker makes sure that every bus schedule meets these new requirements. The tool checks if all of the routes will be driven, the charging time of a bus is more than 15 minutes, 
-the bus has an SOC-value(state of charge value) above the minimal value and if the busses don't get under their minimal battery percentage. If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met. 
-This makes it easier for planners to quickly identify and correct potential issues and minimizing errors in the scheduling process.
+st.write("""PlanningChecker will check if your given bus planning is complete and correct.
+        Whether you're new to this type of software or an experienced user, this tool will help you check and improve your planning. 
+        With the transition to electric busses, bus scheduling has got more requirements. PlanningChecker makes sure that every bus schedule meets these new requirements.
+        The tool checks if all of the given routes will be driven, if the charging time of a bus is more than 15 minutes and if the bus has an SOC-value (State of Charge-value) below the minimal value. 
+        If the given bus planning and timetable don't meet the conditions, PlanningChecker will let you know where the conditions aren't met. This makes it easier for planners to quickly identify and correct potential issues and minimizing errors in the scheduling process.
 """)
 st.header("Meet the team")
 
