@@ -54,7 +54,7 @@ def aanpassingen_op_omloop(omloop, Soh):
 def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
-    
+
     if len(tekortopladen) > 0:
         st.error(f"There are {len(tekortopladen)} times a bus is charged too short")
         with st.expander("Click for more information on the charging times mentioned above."):
@@ -125,7 +125,7 @@ def Gantt_chart(omloop):
     yanchor="bottom",
     y=0.01,
     xanchor="right",
-    x=0.999
+    x=1.25
     ))
     return st.plotly_chart(fig)
 
