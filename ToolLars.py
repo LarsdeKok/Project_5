@@ -16,7 +16,7 @@ def aantal_bussen(planning):
 def duur_activiteiten(omloop):
     omloop[omloop.columns[3]] = pd.to_datetime(omloop.iloc[:,3], format = "%H:%M:%S")
     omloop[omloop.columns[4]] = pd.to_datetime(omloop.iloc[:,4], format = "%H:%M:%S")
-    omloop["diff"] = omloop[omloop.columns[9]] - omloop[omloop.columns[10]]
+    omloop["diff"] = omloop[omloop.columns[4]] - omloop[omloop.columns[5]]
     return omloop
 
 
