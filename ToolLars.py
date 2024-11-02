@@ -125,7 +125,7 @@ def Gantt_chart(omloop):
     yanchor="bottom",
     y=0.01,
     xanchor="right",
-    x=1.1
+    x=1.20
     ))
     return st.plotly_chart(fig)
 
