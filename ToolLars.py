@@ -53,7 +53,7 @@ def aanpassingen_op_omloop(omloop, Soh):
 
 def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
-    tekortopladen = oplaadmomenten[oplaadmomenten['diff2'] < 15]
+    tekortopladen = oplaadmomenten[oplaadmomenten['diff2'] < pd.Timedelta(minutes=15)]
     if len(tekortopladen) > 0:
         st.error(f"There are {len(tekortopladen)} times a bus is charged too short")
         with st.expander("Click for more information on the charging times mentioned above."):
