@@ -1,7 +1,6 @@
 clear, clc, close all
 
 % parameters
-P_output = Proll + Pdrag + Pkinetic + Pgravationaitl;% Definieer constanten en variabelen
 cr = 0.01;               % Rolweerstandscoëfficiënt
 m = 70;                  % Massa van de fietser + fiets (kg)
 g = 9.81;                % Gravitatieversnelling (m/s^2)
