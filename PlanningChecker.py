@@ -12,6 +12,10 @@ st.title('Planning checker')
 st.write('Made by: Group 8')
 
 def filesUploaded(dienstregeling, omloop):
+    """
+    Leest alle geuploade bestanden, zet ze om naar een Pands DataFrame en checkt
+    het verschillende omlopen in de gegeven planning.
+    """
     dfomloop=pd.read_excel(omloop)
     dfdienst=pd.read_excel(dienstregeling)
     dfafstand = pd.read_excel(dienstregeling, "Afstandsmatrix")
@@ -24,12 +28,27 @@ def filesUploaded(dienstregeling, omloop):
     generate_values(aantallen)
 
 def generate_values(aantallen):
+    """
+    Genereerd een dataframe voor iedere unieke bus een SOH van 90 indien de advanced 
+    opties worden gebruikt. 
+
+    Returns
+    -------
+    Inputfields: Pandas DataFrame met als index omloop nummer/index en een SOH waarde 
+    van 90%
+    """
+
     inputfields = {}
     for i in aantallen:
         inputfields[int(i)] = 90
     doTheChecks(pd.DataFrame.from_dict(inputfields, orient="index"))
 
 def doTheChecks(inputfields):
+    """
+    Stelt indien geen advanced opties gebruikt worden standaardwaarden in voor alle nodige 
+    session state variabelen en verwijst de gebruiker door naar de resultaten pagina
+    """
+
     st.session_state['SOHs'] = inputfields
     st.session_state['FormFilled'] = True
     st.session_state["Minimal_battery"] = 10
@@ -39,6 +58,13 @@ def doTheChecks(inputfields):
     st.session_state["Charge_speed"] = 450
 
     st.switch_page("pages/2-Results.py")
+
+
+
+# """
+# Doorloopt alle nodige stappen op de startpagina en indien alles klopt zend de gebruiker door
+# naar de results of AdvancedOptions pagina.
+# """
 
 if 'FormFilled' not in st.session_state:
     # File upload section
@@ -76,15 +102,3 @@ else:
         for key in st.session_state.keys():
             del st.session_state[key]
         st.switch_page("PlanningChecker.py")
-
-# with st.popover("Submit files"): 
-#     if dienstregeling is not None and omloop is not None:
-#         filesUploaded()
-#     else:
-#         st.write("Please add the files first.")
-
-
-
-
-# for i in aantallen:
-#     inputfields.append(st.number_input(f"Insert the SOH for bus {i}."))

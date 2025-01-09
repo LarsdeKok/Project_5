@@ -54,6 +54,7 @@ def aanpassingen_op_omloop(omloop, Soh):
 def oplaadtijd(omloop):
     oplaadmomenten = omloop[omloop.iloc[:,5].str.contains("opladen")]
     tekortopladen = oplaadmomenten[oplaadmomenten['diff'] < pd.Timedelta(minutes=15)]
+
     if len(tekortopladen) > 0:
         st.error(f"There are {len(tekortopladen)} times a bus is charged too short")
         with st.expander("Click for more information on the charging times mentioned above."):
@@ -109,6 +110,7 @@ def Check_dienstregeling(connexxion_df, omloopplanning_df):
             st.write(pd.DataFrame(uncovered_rides))
     else:
         st.success("✓) All rides will be driven given your bus plannning.")
+    st.write("")
 
 def Gantt_chart(omloop):
     omloop['starttijd datum'] = pd.to_datetime(omloop['starttijd datum'])
@@ -123,7 +125,7 @@ def Gantt_chart(omloop):
     yanchor="bottom",
     y=0.01,
     xanchor="right",
-    x=0.999
+    x=1.23
     ))
     return st.plotly_chart(fig)
 
